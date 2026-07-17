@@ -89,7 +89,7 @@ jobs:
         working-directory: projects/abbw
         env:
           USER: ${{ secrets.SSH_USER }}
-        run: rsync -z --mkpath ramen.gcore.json abbw.gcore.json "$USER"@staging:gcore/
+        run: rsync -z --mkpath ramen.gcore.json project.gcore.json "$USER"@staging:gcore/
   restart:
     needs: [setup, sync]
     if: needs.setup.outputs.environments != '[]'
