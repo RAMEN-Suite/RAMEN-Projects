@@ -1,0 +1,204 @@
+{
+  "collection": [
+    {
+      "match": ["Letter"],
+      "blocks": [
+        {
+          "type": "headline",
+          "properties": {
+            "title": {
+              "path": "label"
+            }
+          }
+        },
+        {
+          "type": "attributes",
+          "properties": {
+            "title": "collection.letter.metadata.title",
+            "items": [
+              {
+                "kind": "node",
+                "label": "collection.letter.metadata.sentPerson",
+                "value": {
+                  "path": "annotation[sent].refers[Person].*"
+                },
+                "property": "label",
+                "isLinked": true,
+                "isEmptyVisible": true
+              },
+              {
+                "kind": "node",
+                "label": "collection.letter.metadata.sentPlace",
+                "value": {
+                  "path": "annotation[sent].refers[Place].*"
+                },
+                "property": "label",
+                "isLinked": true,
+                "isEmptyVisible": true
+              },
+              {
+                "label": "collection.letter.metadata.sentDate",
+                "value": {
+                  "path": "annotation[sent].dateStart"
+                },
+                "isEmptyVisible": true
+              },
+              {
+                "kind": "node",
+                "label": "collection.letter.metadata.receivedPerson",
+                "value": {
+                  "path": "annotation[received].refers[Person].*"
+                },
+                "property": "label",
+                "isLinked": true,
+                "isEmptyVisible": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "text",
+          "properties": {
+            "title": "collection.letter.text.abstract",
+            "annotations": {
+              "path": "children[Abstract].children[Text].annotation.*"
+            },
+            "text": {
+              "path": "children[Abstract].children[Text].text"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "properties": {
+            "title": "collection.letter.text.letter",
+            "annotations": {
+              "path": "children[Witness].children[Text].annotation.*"
+            },
+            "text": {
+              "path": "children[Witness].children[Text].text"
+            }
+          }
+        },
+        {
+          "type": "citation",
+          "properties": {
+            "title": "collection.letter.citation.title",
+            "citation": {
+              "template": "collection.letter.citation.template",
+              "values": {
+                "title": { "path": "label" },
+                "author": {
+                  "path": "editor",
+                  "valueMap": {
+                    "bronnerDagmar": "Dagmar Bronner",
+                    "schniederIsabel": "Isabel Schnieder",
+                    "voßKlaasDieter": "Klaas-Dieter Voß",
+                    "wegnerManfred": "Manfred Wegner"
+                  }
+                },
+                "edition": "collection.letter.citation.edition"
+              }
+            },
+            "license": {
+              "template": "collection.letter.citation.license"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "entity": [
+    {
+      "match": ["Person"],
+      "blocks": [
+        {
+          "type": "headline",
+          "properties": {
+            "title": {
+              "path": "label"
+            }
+          }
+        },
+        {
+          "type": "attributes",
+          "properties": {
+            "title": "entity.person.metadata.title",
+            "items": [
+              {
+                "label": "entity.person.metadata.forename",
+                "value": {
+                  "path": "forename"
+                },
+                "isEmptyVisible": false
+              },
+              {
+                "label": "entity.person.metadata.surname",
+                "value": {
+                  "path": "surname"
+                },
+                "isEmptyVisible": false
+              },
+              {
+                "label": "entity.person.metadata.birth",
+                "value": {
+                  "path": "birth"
+                },
+                "isEmptyVisible": false
+              },
+              {
+                "label": "entity.person.metadata.death",
+                "value": {
+                  "path": "death"
+                },
+                "isEmptyVisible": false
+              },
+              {
+                "label": "entity.person.metadata.floruitNotBefore",
+                "value": {
+                  "path": "floruitNotBefore"
+                },
+                "isEmptyVisible": false
+              },
+              {
+                "label": "entity.person.metadata.floruitNotAfter",
+                "value": {
+                  "path": "floruitNotAfter"
+                },
+                "isEmptyVisible": false
+              }
+            ]
+          }
+        },
+        {
+          "type": "text",
+          "properties": {
+            "title": "entity.description",
+            "annotations": { "path": "annotation[description].refers[Text].annotation.*" },
+            "text": { "path": "annotation[description].refers.text" }
+          }
+        }
+      ]
+    },
+    {
+      "match": ["Entity"],
+      "blocks": [
+        {
+          "type": "headline",
+          "properties": {
+            "title": {
+              "path": "label"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "properties": {
+            "title": "entity.description",
+            "text": { "path": "annotation[description].refers.text" }
+          }
+        }
+      ]
+    }
+  ]
+}

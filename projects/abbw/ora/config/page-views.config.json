@@ -1,0 +1,180 @@
+{
+  "home": {
+    "hero": {
+      "title": "pages.home.title",
+      "subTitle": "pages.home.subTitle",
+      "align": "left",
+      "image": "/images/bg_abbw.jpg"
+    },
+    "main": [
+      {
+        "blocks": [
+          {
+            "type": "markdown",
+            "properties": { "file": "introduction.md" }
+          }
+        ]
+      }
+    ],
+    "aside": []
+  },
+  "pages": [
+    {
+      "path": "legal-notice",
+      "title": "footer.links.legal-notice",
+      "content": {
+        "main": [
+          {
+            "blocks": [
+              {
+                "type": "markdown",
+                "properties": { "file": "legal/legal-notice.md" }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "path": "privacy",
+      "title": "footer.links.privacy",
+      "content": {
+        "main": [
+          {
+            "blocks": [
+              {
+                "type": "markdown",
+                "properties": { "file": "legal/privacy.md" }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "path": "project",
+      "title": "navbar.project",
+      "views": [
+        {
+          "path": "introduction",
+          "title": "pages.introduction",
+          "icon": "pi pi-book",
+          "content": {
+            "main": [
+              {
+                "blocks": [
+                  {
+                    "type": "markdown",
+                    "properties": { "file": "introduction.md" }
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "path": "staff",
+          "title": "pages.staff",
+          "icon": "pi pi-users",
+          "content": {
+            "main": [
+              {
+                "blocks": [
+                  {
+                    "type": "markdown",
+                    "properties": { "file": "project/staff.md" }
+                  }
+                ]
+              }
+            ],
+            "aside": [
+              {
+                "blocks": [
+                  {
+                    "type": "link-list",
+                    "properties": {
+                      "items": [
+                        {
+                          "label": "Johannes a Lasco Bibliothek | Große Kirche Emden",
+                          "icon": "pi pi-link",
+                          "url": "https://www.jalb.de/"
+                        },
+                        {
+                          "label": "TH Mittelhessen | Gießen",
+                          "icon": "pi pi-link",
+                          "url": "https://www.thm.de/"
+                        },
+                        {
+                          "label": "Akademie der Wissenschaften und Literatur | Mainz",
+                          "icon": "pi pi-link",
+                          "url": "https://www.adwmainz.de/"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "path": "collaborators",
+          "title": "pages.collaborators",
+          "icon": "pi pi-address-book",
+          "content": {
+            "main": [
+              {
+                "blocks": [
+                  {
+                    "type": "markdown",
+                    "properties": { "file": "project/collaborators.md" }
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "path": "digital-methods",
+          "icon": "pi pi-share-alt",
+          "title": "pages.digital-methods",
+          "content": {
+            "main": [
+              {
+                "blocks": [
+                  {
+                    "type": "markdown",
+                    "properties": { "file": "project/digital-methods.md" }
+                  }
+                ]
+              }
+            ],
+            "aside": [
+              {
+                "blocks": [
+                  {
+                    "type": "link-list",
+                    "properties": {
+                      "items": [
+                        {
+                          "label": "RAMEN Suite (GitHub)",
+                          "icon": "pi pi-link",
+                          "url": "https://github.com/RAMEN-Suite"
+                        },
+                        {
+                          "label": "NAKAR – Graph Exploration",
+                          "icon": "pi pi-link",
+                          "url": "https://go.thm.de/nakar"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

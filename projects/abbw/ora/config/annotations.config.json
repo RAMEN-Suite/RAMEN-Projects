@@ -1,0 +1,399 @@
+{
+  "unknownAnnotation": "warn",
+  "invalidRange": "clamp",
+  "definitions": {
+    "p": {
+      "layer": "structure",
+      "renderAs": "p",
+      "classes": ["my-3"]
+    },
+    "postscript": {
+      "layer": "structure",
+      "renderAs": "section",
+      "classes": ["mt-6"]
+    },
+    "div-writingSession": {
+      "layer": "structure",
+      "renderAs": "section",
+      "classes": []
+    },
+    "opener": {
+      "layer": "structure",
+      "renderAs": "div",
+      "classes": ["mb-3"]
+    },
+    "closer": {
+      "layer": "structure",
+      "renderAs": "div",
+      "classes": ["mt-3"]
+    },
+    "dateline": {
+      "layer": "structure",
+      "renderAs": "div",
+      "classes": ["my-1"]
+    },
+    "salute": {
+      "layer": "structure",
+      "renderAs": "div",
+      "classes": ["my-1"]
+    },
+    "signed": {
+      "layer": "structure",
+      "renderAs": "div",
+      "classes": ["my-1"]
+    },
+    "address": {
+      "layer": "structure",
+      "renderAs": "address",
+      "classes": ["not-italic", "my-2"],
+      "classMappings": [
+        {
+          "property": "rendition",
+          "mappings": {
+            "#aq": ["font-serif"],
+            "#b": ["font-bold"],
+            "#fr": ["font-sans"],
+            "#g": ["font-semibold"],
+            "#i": ["italic"],
+            "#k": ["tracking-wide", "uppercase"],
+            "#u": ["underline"],
+            "#sup": ["align-super", "text-xs"]
+          }
+        }
+      ]
+    },
+    "addrLine": {
+      "layer": "structure",
+      "renderAs": "div",
+      "classes": []
+    },
+    "head": {
+      "layer": "structure",
+      "renderAs": "h3",
+      "classes": ["text-lg", "font-semibold", "my-3"]
+    },
+    "lg": {
+      "layer": "structure",
+      "renderAs": "div",
+      "classes": ["my-4"]
+    },
+    "lg-poem": {
+      "layer": "structure",
+      "renderAs": "div",
+      "classes": ["my-4"]
+    },
+    "l": {
+      "layer": "structure",
+      "renderAs": "div",
+      "classes": []
+    },
+
+    "hi": {
+      "layer": "inline",
+      "classMappings": [
+        {
+          "property": "rendition",
+          "mappings": {
+            "#aq": ["font-serif"],
+            "#b": ["font-bold"],
+            "#fr": ["font-sans"],
+            "#g": ["font-semibold"],
+            "#i": ["italic"],
+            "#k": ["tracking-wide", "uppercase"],
+            "#u": ["underline"],
+            "#sup": ["align-super", "text-xs"]
+          }
+        }
+      ]
+    },
+    "del": {
+      "layer": "inline",
+      "classes": ["line-through", "opacity-70"],
+      "classMappings": [
+        {
+          "property": "rendition",
+          "mappings": {
+            "#aq": ["font-serif"],
+            "#b": ["font-bold"],
+            "#fr": ["font-sans"],
+            "#g": ["font-semibold"],
+            "#i": ["italic"],
+            "#k": ["tracking-wide", "uppercase"],
+            "#u": ["underline"],
+            "#sup": ["align-super", "text-xs"]
+          }
+        }
+      ]
+    },
+    "add": {
+      "layer": "inline",
+      "behavior": "dialog",
+      "classes": ["underline", "decoration-dashed"],
+      "dialog": {
+        "title": "annotations.add",
+        "description": [{ "path": "text" }, { "path": "place" }]
+      }
+    },
+    "supplied": {
+      "layer": "inline",
+      "classes": ["opacity-80"]
+    },
+    "subst": {
+      "layer": "inline",
+      "classes": ["bg-slate-100"]
+    },
+    "choice": {
+      "layer": "inline",
+      "classes": ["underline", "decoration-dotted"]
+    },
+    "orig": {
+      "layer": "inline",
+      "classes": ["opacity-80"]
+    },
+    "expan": {
+      "layer": "inline",
+      "classes": ["italic"]
+    },
+    "corr": {
+      "layer": "inline",
+      "classes": ["underline", "decoration-slate-500"]
+    },
+    "ex": {
+      "layer": "inline",
+      "classes": ["opacity-80"]
+    },
+    "metamark": {
+      "layer": "inline",
+      "classes": ["text-slate-500", "text-sm"]
+    },
+    "g": {
+      "layer": "inline",
+      "classes": ["font-serif"]
+    },
+    "abbr": {
+      "layer": "inline",
+      "behavior": "dialog",
+      "renderAs": "abbr",
+      "classes": ["underline", "decoration-slate-500", "decoration-dotted", "cursor-pointer"],
+      "dialog": {
+        "title": "annotations.abbreviation",
+        "description": [{ "path": "expansion" }]
+      }
+    },
+    "unclear": {
+      "layer": "inline",
+      "behavior": "dialog",
+      "classes": ["underline", "decoration-amber-500", "decoration-wavy", "cursor-pointer"],
+      "dialog": {
+        "title": "annotations.unclear",
+        "description": [{ "path": "reason" }, { "path": "cert" }]
+      }
+    },
+    "sic": {
+      "layer": "inline",
+      "behavior": "dialog",
+      "classes": ["underline", "decoration-red-500", "decoration-wavy", "cursor-pointer"],
+      "dialog": {
+        "title": "annotations.sic",
+        "description": [{ "path": "correction" }, { "path": "certainty" }]
+      }
+    },
+    "reg": {
+      "layer": "inline",
+      "behavior": "dialog",
+      "classes": ["underline", "decoration-slate-500", "decoration-dotted", "cursor-pointer"],
+      "dialog": {
+        "title": "annotations.regularization",
+        "description": [{ "path": "regularisation" }]
+      }
+    },
+    "note": {
+      "layer": "inline",
+      "behavior": "dialog",
+      "classes": [
+        "underline",
+        "decoration-violet-500",
+        "decoration-dotted",
+        "decoration-2",
+        "underline-offset-4",
+        "cursor-pointer"
+      ],
+      "dialog": {
+        "title": "annotations.note",
+        "description": [{ "path": "hand" }, { "path": "place" }]
+      }
+    },
+    "persName": {
+      "layer": "inline",
+      "behavior": "dialog",
+      "classes": ["border-red-500", "border-b-2", "cursor-pointer"],
+      "dialog": {
+        "title": "annotations.person",
+        "description": [{ "path": "text" }],
+        "references": [
+          {
+            "label": { "path": "refers[Entity].label" },
+            "uuid": { "path": "refers[Entity].uuid" },
+            "icon": "pi pi-user"
+          }
+        ]
+      }
+    },
+    "placeName": {
+      "layer": "inline",
+      "behavior": "dialog",
+      "classes": ["border-blue-500", "border-b-2", "cursor-pointer"],
+      "dialog": {
+        "title": "annotations.place",
+        "description": [{ "path": "text" }],
+        "references": [
+          {
+            "label": { "path": "refers[Entity].label" },
+            "uuid": { "path": "refers[Entity].uuid" },
+            "icon": "pi pi-map-marker"
+          }
+        ]
+      }
+    },
+    "orgName": {
+      "layer": "inline",
+      "behavior": "dialog",
+      "classes": ["border-orange-500", "border-b-2", "cursor-pointer"],
+      "dialog": {
+        "title": "annotations.organization",
+        "description": [{ "path": "text" }],
+        "references": [
+          {
+            "label": { "path": "refers[Entity].label" },
+            "uuid": { "path": "refers[Entity].uuid" },
+            "icon": "pi pi-building"
+          }
+        ]
+      }
+    },
+    "rs-term": {
+      "layer": "inline",
+      "behavior": "dialog",
+      "classes": ["border-green-500", "border-b-2", "cursor-pointer"],
+      "dialog": {
+        "title": "annotations.term",
+        "description": [{ "path": "text" }],
+        "references": [
+          {
+            "label": { "path": "refers[Entity].label" },
+            "uuid": { "path": "refers[Entity].uuid" },
+            "icon": "pi pi-tag"
+          }
+        ]
+      }
+    },
+    "rs-bible": {
+      "layer": "inline",
+      "behavior": "dialog",
+      "classes": ["border-yellow-500", "border-b-2", "cursor-pointer"],
+      "dialog": {
+        "title": "annotations.bibleVerse",
+        "description": [{ "path": "text" }],
+        "references": [
+          {
+            "label": { "path": "refers[Entity].label" },
+            "uuid": { "path": "refers[Entity].uuid" },
+            "icon": "pi pi-book"
+          }
+        ]
+      }
+    },
+    "rs-comment": {
+      "priority": 100,
+      "layer": "inline",
+      "behavior": "dialog",
+      "classes": ["bg-yellow-100", "cursor-pointer"],
+      "dialog": {
+        "title": "annotations.comment",
+        "description": [
+          {
+            "path": "refers.text",
+            "annotations": { "path": "refers[Content].annotation.*" }
+          }
+        ]
+      }
+    },
+    "commented": {
+      "priority": 100,
+      "layer": "inline",
+      "behavior": "dialog",
+      "classes": ["bg-yellow-100", "cursor-pointer"],
+      "dialog": {
+        "title": "annotations.comment",
+        "description": [
+          {
+            "path": "refers.text",
+            "annotations": { "path": "refers[Content].annotation.*" }
+          }
+        ]
+      }
+    },
+    "seg-comment": {
+      "layer": "inline",
+      "behavior": "dialog",
+      "classes": ["bg-yellow-100", "cursor-pointer"],
+      "dialog": {
+        "title": "annotations.comment",
+        "description": [
+          {
+            "path": "refers.text",
+            "annotations": { "path": "refers[Content].annotation.*" }
+          }
+        ]
+      }
+    },
+    "bibl": {
+      "layer": "inline",
+      "behavior": "dialog",
+      "classes": ["underline", "decoration-blue-600", "cursor-pointer"],
+      "dialog": {
+        "title": "annotations.externalLink",
+        "description": [{ "path": "text" }],
+        "externalLink": { "path": "sameAs" }
+      }
+    },
+    "ptr": {
+      "layer": "inline",
+      "behavior": "dialog",
+      "classes": ["underline", "decoration-blue-600", "cursor-pointer"],
+      "dialog": {
+        "title": "annotations.externalLink",
+        "externalLink": { "path": "target" }
+      }
+    },
+
+    "lb": {
+      "layer": "inline",
+      "behavior": "line-break"
+    },
+    "pb": {
+      "layer": "inline",
+      "behavior": "detach",
+      "placement": "margin",
+      "classes": ["text-slate-500", "select-none", "text-xs"],
+      "label": [{ "path": "n" }],
+      "dialog": {
+        "externalLink": { "path": "facs" }
+      }
+    },
+    "fw-folNum": {
+      "layer": "inline",
+      "behavior": "detach",
+      "placement": "margin",
+      "label": [{ "path": "text" }],
+      "classes": ["text-slate-500", "select-none", "text-xs"]
+    },
+    "gap": {
+      "layer": "inline",
+      "behavior": "detach",
+      "placement": "inline",
+      "classes": ["text-slate-500", "text-sm"],
+      "label": [{ "path": "quantity" }, { "path": "unit" }, { "path": "reason" }]
+    }
+  }
+}

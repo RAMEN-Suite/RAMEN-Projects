@@ -1,0 +1,1020 @@
+// [STEP C01] Import corpora and corpus hierarchy
+CALL apoc.load.json(
+  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/sections.json'
+)
+YIELD value AS json
+
+CALL (json) {
+  UNWIND json.nodes AS sourceNode
+
+  CREATE (corpus:Corpus:Collection {
+    uuid: sourceNode.uuid,
+    label: sourceNode.label
+  })
+
+  RETURN count(corpus) AS importedCorpora
+}
+
+CALL (json) {
+  UNWIND json.edges AS edge
+
+  MATCH (source:Corpus:Collection {
+    uuid: edge.source
+  })
+
+  MATCH (target:Corpus:Collection {
+    uuid: edge.target
+  })
+
+  CREATE (source)-[:PART_OF]->(target)
+
+  RETURN count(*) AS importedCorpusRelations
+}
+
+RETURN
+  importedCorpora,
+  importedCorpusRelations;
+
+
+// [STEP C02] Import letters, documents and figures
+:auto
+CALL apoc.load.json(
+  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json'
+)
+YIELD value AS json
+
+UNWIND json.record AS record
+
+WITH record
+WHERE record.metadata.generalMetadataIsPresent = true
+  AND trim(
+    coalesce(
+      toString(
+        record.metadata.generalMetadata.attributes.uuid
+      ),
+      ''
+    )
+  ) <> ''
+
+CALL (record) {
+  WITH
+    record.metadata.generalMetadata AS generalMetadata,
+    record.metadata.communication AS communication
+
+  MERGE (resource:Collection {
+    uuid: generalMetadata.attributes.uuid
+  })
+
+  SET resource += apoc.map.clean(
+    apoc.map.merge(
+      apoc.convert.toMap(generalMetadata.attributes),
+      {
+        xmlDownload: communication.attributes.xmlDownload
+      }
+    ),
+    [],
+    ['', null]
+  )
+
+  FOREACH (_ IN CASE
+    WHEN generalMetadata.nodeLabel = 'Letter'
+    THEN [1]
+    ELSE []
+  END |
+    SET resource:Letter
+  )
+
+  FOREACH (_ IN CASE
+    WHEN generalMetadata.nodeLabel = 'Document'
+    THEN [1]
+    ELSE []
+  END |
+    SET resource:Document
+  )
+
+  FOREACH (_ IN CASE
+    WHEN generalMetadata.nodeLabel = 'Figure'
+    THEN [1]
+    ELSE []
+  END |
+    SET resource:Figure
+  )
+} IN TRANSACTIONS OF 500 ROWS
+
+RETURN count(*) AS processedResourceRecords;
+
+
+// [STEP C03] Import variants
+:auto
+CALL apoc.load.json(
+  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json'
+)
+YIELD value AS json
+
+UNWIND json.record AS record
+
+WITH record
+WHERE trim(
+  coalesce(
+    toString(
+      record.metadata.variantMetadata.attributes.uuid
+    ),
+    ''
+  )
+) <> ''
+
+CALL (record) {
+  MATCH (resource:Collection {
+    uuid: record.metadata.generalMetadata.attributes.uuid
+  })
+
+  MERGE (variant:Variant:Collection {
+    uuid: record.metadata.variantMetadata.attributes.uuid
+  })
+
+  SET variant += apoc.map.clean(
+    apoc.convert.toMap(
+      record.metadata.variantMetadata.attributes
+    ),
+    [],
+    ['', null]
+  )
+
+  MERGE (variant)-[:PART_OF]->(resource)
+} IN TRANSACTIONS OF 500 ROWS
+
+RETURN count(*) AS processedVariantRecords;
+
+
+// [STEP C04] Import abstracts with texts and annotations
+:auto
+CALL apoc.load.json(
+  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json'
+)
+YIELD value AS json
+
+UNWIND json.record AS record
+
+WITH record
+WHERE record.metadata.generalMetadataIsPresent = true
+  AND record.metadata.generalMetadata.nodeLabel = 'Letter'
+  AND record.metadata.variantMetadata.attributes.isReference = true
+  AND trim(
+    coalesce(
+      toString(record.texts.abstract.text),
+      ''
+    )
+  ) <> ''
+
+CALL (record) {
+  MATCH (letter:Letter:Collection {
+    uuid: record.metadata.generalMetadata.attributes.uuid
+  })
+
+  WITH
+    letter,
+    record.texts.abstract AS abstract
+
+  CREATE (abstractCollection:Abstract:Collection {
+    uuid: randomUUID(),
+    label: 'Abstract zu ' + coalesce(
+      letter.label,
+      letter.uuid
+    )
+  })
+
+  CREATE (abstractCollection)-[:PART_OF]->(letter)
+
+  CREATE (textNode:Text:Content {
+    uuid: CASE
+      WHEN abstract.uuid IS NOT NULL
+        AND trim(toString(abstract.uuid)) <> ''
+      THEN trim(toString(abstract.uuid))
+
+      ELSE randomUUID()
+    END,
+    text: abstract.text
+  })
+
+  CREATE (textNode)-[:PART_OF]->(
+    abstractCollection
+  )
+
+  WITH
+    textNode,
+    abstract
+
+  UNWIND coalesce(
+    apoc.convert.toList(abstract.properties),
+    []
+  ) AS property
+
+  WITH
+    textNode,
+    property,
+    apoc.convert.toMap(property) AS propertyMap,
+    coalesce(
+      apoc.convert.toMap(property.attributes),
+      {}
+    ) AS attributes
+
+  MERGE (annotation:Annotation {
+    uuid: CASE
+      WHEN property.uuid IS NOT NULL
+        AND trim(toString(property.uuid)) <> ''
+      THEN trim(toString(property.uuid))
+
+      ELSE randomUUID()
+    END
+  })
+
+  SET annotation += apoc.map.removeKeys(
+    propertyMap,
+    [
+      'attributes',
+      'uuid',
+      'guid',
+      'startIndex',
+      'endIndex'
+    ]
+  )
+
+  SET annotation += attributes
+
+  SET
+    annotation.startIndex = CASE
+      WHEN property.startIndex IS NULL
+      THEN null
+      ELSE toInteger(property.startIndex)
+    END,
+    annotation.endIndex = CASE
+      WHEN property.endIndex IS NULL
+      THEN null
+      ELSE toInteger(property.endIndex)
+    END
+
+  SET annotation.type = CASE
+    WHEN property.teiType IS NULL
+    THEN annotation.type
+
+    WHEN annotation.type IS NULL
+      OR trim(toString(annotation.type)) = ''
+    THEN property.teiType
+
+    WHEN annotation.type = property.teiType
+    THEN annotation.type
+
+    WHEN annotation.type STARTS WITH property.teiType + '-'
+    THEN annotation.type
+
+    ELSE property.teiType + '-' + annotation.type
+  END
+
+  MERGE (textNode)-[:HAS_ANNOTATION]->(
+    annotation
+  )
+} IN TRANSACTIONS OF 50 ROWS
+
+RETURN count(*) AS processedAbstractRecords;
+
+
+// [STEP C05] Import main texts and notes with annotations
+:auto
+CALL apoc.load.json(
+  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json'
+)
+YIELD value AS json
+
+UNWIND json.record AS record
+
+WITH
+  record,
+  record.metadata.variantMetadata.attributes.uuid AS variantUuid,
+  record.texts.variant.main_text AS mainText,
+  record.texts.note AS note
+
+WITH
+  record,
+  variantUuid,
+  CASE
+    WHEN variantUuid IS NULL
+      OR mainText IS NULL
+      OR mainText.text IS NULL
+    THEN []
+
+    ELSE [{
+      parentUuid: variantUuid,
+      source: mainText
+    }]
+  END
+  +
+  CASE
+    WHEN variantUuid IS NULL
+      OR trim(
+        coalesce(
+          toString(note.text),
+          ''
+        )
+      ) = ''
+    THEN []
+
+    ELSE [{
+      parentUuid: variantUuid,
+      source: note
+    }]
+  END AS textSources
+
+UNWIND textSources AS textSource
+
+CALL (textSource) {
+  MATCH (parent:Variant:Collection {
+    uuid: textSource.parentUuid
+  })
+
+  WITH
+    parent,
+    textSource.source AS sourceText
+
+  CREATE (textNode:Text:Content {
+    uuid: CASE
+      WHEN sourceText.uuid IS NOT NULL
+        AND trim(toString(sourceText.uuid)) <> ''
+      THEN trim(toString(sourceText.uuid))
+
+      ELSE randomUUID()
+    END
+  })
+
+  SET textNode += apoc.map.clean(
+    {
+      text: sourceText.text
+    },
+    [],
+    ['', null]
+  )
+
+  CREATE (textNode)-[:PART_OF]->(parent)
+
+  WITH
+    textNode,
+    sourceText
+
+  UNWIND coalesce(
+    apoc.convert.toList(sourceText.properties),
+    []
+  ) AS property
+
+  WITH
+    textNode,
+    property,
+    apoc.convert.toMap(property) AS propertyMap,
+    coalesce(
+      apoc.convert.toMap(property.attributes),
+      {}
+    ) AS attributes
+
+  MERGE (annotation:Annotation {
+    uuid: CASE
+      WHEN property.uuid IS NOT NULL
+        AND trim(toString(property.uuid)) <> ''
+      THEN trim(toString(property.uuid))
+
+      ELSE randomUUID()
+    END
+  })
+
+  SET annotation += apoc.map.removeKeys(
+    propertyMap,
+    [
+      'attributes',
+      'uuid',
+      'guid',
+      'startIndex',
+      'endIndex'
+    ]
+  )
+
+  SET annotation += attributes
+
+  SET
+    annotation.startIndex = CASE
+      WHEN property.startIndex IS NULL
+      THEN null
+      ELSE toInteger(property.startIndex)
+    END,
+    annotation.endIndex = CASE
+      WHEN property.endIndex IS NULL
+      THEN null
+      ELSE toInteger(property.endIndex)
+    END
+
+  SET annotation.type = CASE
+    WHEN property.teiType IS NULL
+    THEN annotation.type
+
+    WHEN annotation.type IS NULL
+      OR trim(toString(annotation.type)) = ''
+    THEN property.teiType
+
+    WHEN annotation.type = property.teiType
+    THEN annotation.type
+
+    WHEN annotation.type STARTS WITH property.teiType + '-'
+    THEN annotation.type
+
+    ELSE property.teiType + '-' + annotation.type
+  END
+
+  MERGE (textNode)-[:HAS_ANNOTATION]->(
+    annotation
+  )
+} IN TRANSACTIONS OF 25 ROWS
+
+RETURN count(*) AS processedTextSources;
+
+
+// [STEP C06] Import editorial comments and their annotations
+:auto
+CALL apoc.load.json(
+  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json'
+)
+YIELD value AS json
+
+UNWIND json.record AS record
+
+UNWIND coalesce(
+  apoc.convert.toList(
+    record.texts.variant.editorial_comments
+  ),
+  []
+) AS comment
+
+WITH comment
+WHERE trim(
+  coalesce(
+    toString(comment.uuid),
+    ''
+  )
+) <> ''
+
+CALL (comment) {
+  MERGE (commentText:Text:Content {
+    uuid: comment.uuid
+  })
+
+  SET commentText += apoc.map.clean(
+    {
+      text: comment.text
+    },
+    [],
+    ['', null]
+  )
+
+  WITH
+    commentText,
+    comment
+
+  UNWIND coalesce(
+    apoc.convert.toList(comment.properties),
+    []
+  ) AS property
+
+  WITH
+    commentText,
+    property,
+    apoc.convert.toMap(property) AS propertyMap,
+    coalesce(
+      apoc.convert.toMap(property.attributes),
+      {}
+    ) AS attributes
+
+  MERGE (annotation:Annotation {
+    uuid: CASE
+      WHEN property.uuid IS NOT NULL
+        AND trim(toString(property.uuid)) <> ''
+      THEN trim(toString(property.uuid))
+
+      ELSE randomUUID()
+    END
+  })
+
+  SET annotation += apoc.map.removeKeys(
+    propertyMap,
+    [
+      'attributes',
+      'uuid',
+      'guid',
+      'startIndex',
+      'endIndex'
+    ]
+  )
+
+  SET annotation += attributes
+
+  SET
+    annotation.startIndex = CASE
+      WHEN property.startIndex IS NULL
+      THEN null
+      ELSE toInteger(property.startIndex)
+    END,
+    annotation.endIndex = CASE
+      WHEN property.endIndex IS NULL
+      THEN null
+      ELSE toInteger(property.endIndex)
+    END
+
+  SET annotation.type = CASE
+    WHEN property.teiType IS NULL
+    THEN annotation.type
+
+    WHEN annotation.type IS NULL
+      OR trim(toString(annotation.type)) = ''
+    THEN property.teiType
+
+    WHEN annotation.type = property.teiType
+    THEN annotation.type
+
+    WHEN annotation.type STARTS WITH property.teiType + '-'
+    THEN annotation.type
+
+    ELSE property.teiType + '-' + annotation.type
+  END
+
+  MERGE (commentText)-[:HAS_ANNOTATION]->(
+    annotation
+  )
+} IN TRANSACTIONS OF 50 ROWS
+
+RETURN count(*) AS processedEditorialComments;
+
+
+// [STEP C07] Import corpus introductions
+UNWIND [
+  {
+    corpusUuid: 'ed_f13a5020-2370-4d65-917c-325ca9e77f31',
+    file: 'Lubieniecki.json'
+  },
+  {
+    corpusUuid: 'ed_8084d019-3192-4c14-9b8e-9892e912590b',
+    file: 'Lubieniecki_Hevelius.json'
+  },
+  {
+    corpusUuid: 'ed_81d51ae1-2f85-4e86-8f7e-b758a583d9bb',
+    file: 'Lubieniecki_Schletzer.json'
+  },
+  {
+    corpusUuid: 'ed_3cf2a7c4-ce7d-4689-a8b0-bc137e67850b',
+    file: 'Lubieniecki_Roetlin.json'
+  },
+  {
+    corpusUuid: 'ed_76e6bd33-3064-44e9-a7be-1c0d8dbf6b0e',
+    file: 'Lubieniecki_Reyher.json'
+  },
+  {
+    corpusUuid: 'ed_440bdca6-3003-446d-86ee-27a40c9f548b',
+    file: 'Lubieniecki_Grau.json'
+  },
+  {
+    corpusUuid: 'ed_73889c07-4c54-4a95-ba8e-0191c9b9e733',
+    file: 'Lubieniecki_Guericke_dae.json'
+  },
+  {
+    corpusUuid: 'ed_df0c6771-1543-4668-8c88-92ca07068cf1',
+    file: 'Lubieniecki_Guericke_dj.json'
+  },
+  {
+    corpusUuid: 'ed_9d36824f-209a-427e-ad30-e3c33551ede2',
+    file: 'Lubieniecki_Sivers.json'
+  },
+  {
+    corpusUuid: 'ed_e1538210-f69d-4a0f-81f1-9fb5b0f42af3',
+    file: 'Lubieniecki_Stegmann_dj.json'
+  },
+  {
+    corpusUuid: 'ed_e8f8738c-0db7-44ea-aca3-bc111a0257b7',
+    file: 'Lubieniecki_Rautenstein.json'
+  },
+  {
+    corpusUuid: 'ed_2b69678b-9bf0-4ad8-8a66-77e1b4318af1',
+    file: 'Lubieniecki_Placentinus.json'
+  },
+  {
+    corpusUuid: 'ed_c5f314ab-1366-4eb4-94df-46b03baba1f7',
+    file: 'Lubieniecki_Mueller.json'
+  },
+  {
+    corpusUuid: 'ed_6954e10e-9907-4ba9-afab-2ce2db8b99c9',
+    file: 'Lubieniecki_Olearius.json'
+  },
+  {
+    corpusUuid: 'ed_3f9303b4-aa4b-4ce7-b896-107c782364ab',
+    file: 'Lubieniecki_Riccioli.json'
+  },
+  {
+    corpusUuid: 'ed_5ea511d4-9a0d-42e9-b20f-65629f670cb6',
+    file: 'Lubieniecki_Boulliau.json'
+  },
+  {
+    corpusUuid: 'ed_cad0bf7d-7511-44ac-a743-32815e95013d',
+    file: 'Ruarus_Kirchmann.json'
+  },
+  {
+    corpusUuid: 'ed_566a51cb-a561-490f-83e2-0786f9f0fec8',
+    file: 'Ruarus_Peuschel.json'
+  }
+] AS source
+
+CALL apoc.load.json(
+  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/main/meta-texts/section-introductions/'
+  + source.file
+)
+YIELD value AS json
+
+MATCH (corpus:Corpus:Collection {
+  uuid: source.corpusUuid
+})
+
+CREATE (textNode:Text:Content {
+  uuid: CASE
+    WHEN json.uuid IS NOT NULL
+      AND trim(toString(json.uuid)) <> ''
+    THEN trim(toString(json.uuid))
+
+    ELSE randomUUID()
+  END,
+  text: json.text
+})
+
+CREATE (textNode)-[:PART_OF]->(corpus)
+
+WITH
+  textNode,
+  json
+
+UNWIND coalesce(
+  apoc.convert.toList(json.properties),
+  []
+) AS property
+
+WITH
+  textNode,
+  property,
+  apoc.convert.toMap(property) AS propertyMap,
+  coalesce(
+    apoc.convert.toMap(property.attributes),
+    {}
+  ) AS attributes
+
+MERGE (annotation:Annotation {
+  uuid: CASE
+    WHEN property.uuid IS NOT NULL
+      AND trim(toString(property.uuid)) <> ''
+    THEN trim(toString(property.uuid))
+
+    ELSE randomUUID()
+  END
+})
+
+SET annotation += apoc.map.removeKeys(
+  propertyMap,
+  [
+    'attributes',
+    'uuid',
+    'guid',
+    'startIndex',
+    'endIndex'
+  ]
+)
+
+SET annotation += attributes
+
+SET
+  annotation.startIndex = CASE
+    WHEN property.startIndex IS NULL
+    THEN null
+    ELSE toInteger(property.startIndex)
+  END,
+  annotation.endIndex = CASE
+    WHEN property.endIndex IS NULL
+    THEN null
+    ELSE toInteger(property.endIndex)
+  END
+
+SET annotation.type = CASE
+  WHEN property.teiType IS NULL
+  THEN annotation.type
+
+  WHEN annotation.type IS NULL
+    OR trim(toString(annotation.type)) = ''
+  THEN property.teiType
+
+  WHEN annotation.type = property.teiType
+  THEN annotation.type
+
+  WHEN annotation.type STARTS WITH property.teiType + '-'
+  THEN annotation.type
+
+  ELSE property.teiType + '-' + annotation.type
+END
+
+MERGE (textNode)-[:HAS_ANNOTATION]->(
+  annotation
+)
+
+RETURN
+  count(DISTINCT textNode) AS importedIntroductionTexts,
+  count(annotation) AS importedIntroductionAnnotations;
+
+
+// [STEP C08] Import correspondence annotations
+:auto
+CALL apoc.load.json(
+  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json'
+)
+YIELD value AS json
+
+UNWIND json.record AS record
+
+WITH record
+WHERE record.metadata.generalMetadataIsPresent = true
+  AND record.metadata.generalMetadata.nodeLabel = 'Letter'
+  AND record.metadata.variantMetadata.attributes.isReference = true
+
+UNWIND coalesce(
+  apoc.convert.toList(
+    record.metadata.generalMetadata.correspDesc.correspAction
+  ),
+  []
+) AS action
+
+CALL (record, action) {
+  MATCH (letter:Letter:Collection {
+    uuid: record.metadata.generalMetadata.attributes.uuid
+  })
+
+  WITH
+    letter,
+    action,
+    apoc.convert.toMap(action.attributes) AS attributes
+
+  MERGE (annotation:Annotation {
+    uuid: CASE
+      WHEN action.uuid IS NOT NULL
+        AND trim(toString(action.uuid)) <> ''
+      THEN trim(toString(action.uuid))
+
+      WHEN attributes.uuid IS NOT NULL
+        AND trim(toString(attributes.uuid)) <> ''
+      THEN trim(toString(attributes.uuid))
+
+      ELSE randomUUID()
+    END
+  })
+
+  SET annotation += apoc.map.clean(
+    apoc.map.removeKeys(
+      attributes,
+      ['uuid']
+    ),
+    [],
+    ['', null]
+  )
+
+  MERGE (letter)-[:HAS_ANNOTATION]->(
+    annotation
+  )
+
+  WITH
+    annotation,
+    action
+
+  UNWIND coalesce(
+    apoc.convert.toList(
+      action.outgoingRelations.relation
+    ),
+    []
+  ) AS relation
+
+  MATCH (target:Entity {
+    uuid: relation.uuid
+  })
+
+  CALL apoc.create.relationship(
+    annotation,
+    relation.relationType,
+    {},
+    target
+  )
+  YIELD rel
+
+  RETURN count(rel) AS importedRelations
+} IN TRANSACTIONS OF 100 ROWS
+
+RETURN count(*) AS processedCorrespondenceActions;
+
+
+// [STEP C09] Connect letters to corpora
+:auto
+CALL apoc.load.json(
+  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json'
+)
+YIELD value AS json
+
+UNWIND json.record AS record
+
+WITH record
+WHERE record.metadata.generalMetadataIsPresent = true
+  AND record.metadata.generalMetadata.nodeLabel = 'Letter'
+  AND record.metadata.variantMetadata.attributes.isReference = true
+
+UNWIND coalesce(
+  apoc.convert.toList(
+    record.metadata.communication.outgoingRelations.relation
+  ),
+  []
+) AS relation
+
+WITH
+  record,
+  relation
+WHERE relation.relationType = 'PART_OF'
+  AND relation.targetNodeType = 'Corpus'
+  AND relation.uuid IS NOT NULL
+
+CALL (record, relation) {
+  MATCH (letter:Letter:Collection {
+    uuid: record.metadata.generalMetadata.attributes.uuid
+  })
+
+  MATCH (corpus:Corpus:Collection {
+    uuid: relation.uuid
+  })
+
+  MERGE (letter)-[:PART_OF]->(corpus)
+} IN TRANSACTIONS OF 1000 ROWS
+
+RETURN count(*) AS processedCorpusRelations;
+
+
+// [STEP C10] Import attachment collections
+:auto
+CALL apoc.load.json(
+  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json'
+)
+YIELD value AS json
+
+UNWIND json.record AS record
+
+WITH
+  record,
+  coalesce(
+    apoc.convert.toList(
+      record.metadata.communication.attachments
+    ),
+    []
+  ) AS attachmentUuids
+
+WHERE record.metadata.generalMetadataIsPresent = true
+  AND record.metadata.generalMetadata.nodeLabel = 'Letter'
+  AND record.metadata.variantMetadata.attributes.isReference = true
+  AND size(attachmentUuids) > 0
+
+CALL (record, attachmentUuids) {
+  MATCH (letter:Letter:Collection {
+    uuid: record.metadata.generalMetadata.attributes.uuid
+  })
+
+  CREATE (attachmentGroup:Attachment:Collection {
+    uuid: randomUUID(),
+    label: 'Attachments zu ' + coalesce(
+      letter.label,
+      letter.uuid
+    )
+  })
+
+  CREATE (attachmentGroup)-[:PART_OF]->(
+    letter
+  )
+
+  WITH
+    attachmentGroup,
+    attachmentUuids
+
+  UNWIND attachmentUuids AS attachmentUuid
+
+  MATCH (attachment:Collection {
+    uuid: attachmentUuid
+  })
+
+  MERGE (attachment)-[:PART_OF]->(
+    attachmentGroup
+  )
+} IN TRANSACTIONS OF 100 ROWS
+
+RETURN count(*) AS processedAttachmentGroups;
+
+
+// [STEP C11] Resolve annotation references
+:auto
+MATCH (annotation:Annotation)
+WHERE trim(
+  coalesce(
+    toString(annotation.key),
+    ''
+  )
+) <> ''
+
+UNWIND split(
+  trim(toString(annotation.key)),
+  ' '
+) AS rawKey
+
+WITH
+  annotation,
+  CASE
+    WHEN annotation.type = 'commented'
+    THEN 'comment'
+
+    WHEN annotation.type = 'rs-comment'
+      AND rawKey CONTAINS '/#'
+    THEN 'comment'
+
+    ELSE 'generic'
+  END AS targetKind,
+  CASE
+    WHEN annotation.type = 'rs-comment'
+      AND rawKey CONTAINS '/#'
+    THEN split(rawKey, '/#')[1]
+
+    ELSE replace(rawKey, '#', '')
+  END AS targetUuid
+
+WHERE trim(
+  coalesce(
+    targetUuid,
+    ''
+  )
+) <> ''
+
+CALL (
+  annotation,
+  targetKind,
+  targetUuid
+) {
+  OPTIONAL MATCH (entity:Entity {
+    uuid: targetUuid
+  })
+  WHERE targetKind = 'generic'
+
+  OPTIONAL MATCH (collection:Collection {
+    uuid: targetUuid
+  })
+  WHERE targetKind = 'generic'
+
+  OPTIONAL MATCH (commentText:Text:Content {
+    uuid: targetUuid
+  })
+  WHERE targetKind = 'comment'
+
+  FOREACH (_ IN CASE
+    WHEN entity IS NULL
+    THEN []
+    ELSE [1]
+  END |
+    MERGE (annotation)-[:REFERS_TO]->(entity)
+  )
+
+  FOREACH (_ IN CASE
+    WHEN collection IS NULL
+    THEN []
+    ELSE [1]
+  END |
+    MERGE (annotation)-[:REFERS_TO]->(
+      collection
+    )
+  )
+
+  FOREACH (_ IN CASE
+    WHEN commentText IS NULL
+    THEN []
+    ELSE [1]
+  END |
+    MERGE (annotation)-[:REFERS_TO]->(
+      commentText
+    )
+  )
+} IN TRANSACTIONS OF 2000 ROWS
+
+RETURN count(*) AS processedAnnotationReferences;
+
+
+// [STEP C12] Remove resolved source keys
+:auto
+MATCH (annotation:Annotation)
+WHERE annotation.key IS NOT NULL
+
+CALL (annotation) {
+  REMOVE annotation.key
+} IN TRANSACTIONS OF 5000 ROWS
+
+RETURN count(*) AS cleanedAnnotationKeys;

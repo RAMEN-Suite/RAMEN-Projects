@@ -1,0 +1,1799 @@
+{
+  "texts": {
+    "additionalLabels": ["Text"]
+  },
+  "collections": {
+    "properties": {
+      "system": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "editable": true,
+          "visible": false
+        }
+      ],
+      "base": []
+    },
+    "types": [
+      {
+        "additionalLabel": "Corpus",
+        "level": "primary",
+        "properties": [],
+        "annotations": {
+          "types": [],
+          "properties": [],
+          "entities": [],
+          "additionalTexts": []
+        }
+      },
+      {
+        "additionalLabel": "Letter",
+        "level": "primary",
+        "properties": [
+          {
+            "name": "editor",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "xmlDownload",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "annotations": {
+          "types": [
+            {
+              "type": "sent",
+              "isBlock": false,
+              "category": "project",
+              "defaultSelected": true,
+              "isZeroPoint": false,
+              "hasAdditionalTexts": false,
+              "properties": [
+                {
+                  "name": "dateType",
+                  "type": "string",
+                  "options": ["point", "imprecise", "range"],
+                  "required": false,
+                  "editable": true,
+                  "visible": true
+                },
+                {
+                  "name": "dateStart",
+                  "type": "date",
+                  "required": false,
+                  "editable": true,
+                  "visible": true
+                },
+                {
+                  "name": "dateEnd",
+                  "type": "date",
+                  "required": false,
+                  "editable": true,
+                  "visible": true
+                },
+                {
+                  "name": "dateCertainty",
+                  "options": ["high", "low"],
+                  "type": "string",
+                  "required": false,
+                  "editable": true,
+                  "visible": true
+                }
+              ]
+            },
+            {
+              "type": "received",
+              "isBlock": false,
+              "topLevel": true,
+              "properties": [
+                {
+                  "name": "dateType",
+                  "type": "string",
+                  "options": ["point", "imprecise"],
+                  "required": false,
+                  "editable": true,
+                  "visible": true
+                },
+                {
+                  "name": "dateStart",
+                  "type": "date",
+                  "required": false,
+                  "editable": true,
+                  "visible": true
+                },
+                {
+                  "name": "dateEnd",
+                  "type": "date",
+                  "required": false,
+                  "editable": true,
+                  "visible": true
+                },
+                {
+                  "name": "dateCertainty",
+                  "options": ["high", "low"],
+                  "type": "string",
+                  "required": false,
+                  "editable": true,
+                  "visible": true
+                }
+              ],
+              "shortcut": [],
+              "text": "",
+              "category": "project",
+              "defaultSelected": true
+            },
+            {
+              "type": "comment-editorial_note",
+              "isBlock": false,
+              "category": "project",
+              "defaultSelected": true,
+              "isZeroPoint": false,
+              "hasAdditionalTexts": true,
+              "properties": []
+            }
+          ],
+
+          "properties": [],
+          "entities": [],
+          "additionalTexts": []
+        }
+      },
+      {
+        "additionalLabel": "Document",
+        "level": "primary",
+        "properties": [
+          {
+            "name": "editor",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "xmlDownload",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "annotations": {
+          "types": [],
+          "properties": [],
+          "entities": [],
+          "additionalTexts": []
+        }
+      },
+      {
+        "additionalLabel": "Figure",
+        "level": "primary",
+        "properties": [
+          {
+            "name": "editor",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "xmlDownload",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "annotations": {
+          "types": [],
+          "properties": [],
+          "entities": [],
+          "additionalTexts": []
+        }
+      },
+      {
+        "additionalLabel": "Variant",
+        "level": "secondary",
+        "properties": [
+          {
+            "name": "isReference",
+            "type": "boolean",
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "textType",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "textGenre",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "language",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "archive",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "shelfmark",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "printSourceName",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "printSourceUrl",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "funder",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "license",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "annotations": {
+          "types": [],
+          "properties": [],
+          "entities": [],
+          "additionalTexts": []
+        }
+      },
+      {
+        "additionalLabel": "Attachment",
+        "level": "secondary",
+        "properties": [],
+        "annotations": {
+          "types": [],
+          "properties": [],
+          "entities": [],
+          "additionalTexts": []
+        }
+      },
+      {
+        "additionalLabel": "Abstract",
+        "level": "secondary",
+        "properties": [],
+        "annotations": {
+          "types": [],
+          "properties": [],
+          "entities": [],
+          "additionalTexts": []
+        }
+      }
+    ],
+    "annotations": {
+      "properties": {
+        "system": [],
+        "base": []
+      },
+      "types": [],
+      "entities": [],
+      "additionalTexts": []
+    }
+  },
+  "annotations": {
+    "types": [
+      {
+        "type": "p",
+        "editorRole": "paragraph",
+        "isBlock": true,
+        "category": "structure",
+        "defaultSelected": true,
+        "shortcut": [],
+        "text": "",
+        "properties": [
+          {
+            "name": "rendition",
+            "type": "string",
+            "options": ["#et"],
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "structure",
+        "behaviour": "range"
+      },
+      {
+        "type": "head",
+        "editorRole": "heading",
+        "isBlock": true,
+        "category": "structure",
+        "defaultSelected": true,
+        "shortcut": [],
+        "text": "",
+        "properties": [
+          {
+            "name": "lang",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "structure",
+        "behaviour": "range"
+      },
+      {
+        "type": "row",
+        "editorRole": "tableRow",
+        "isBlock": true,
+        "category": "structure",
+        "defaultSelected": true,
+        "shortcut": [],
+        "text": "",
+        "properties": [],
+        "role": "structure",
+        "behaviour": "range"
+      },
+      {
+        "type": "lb",
+        "editorRole": "hardBreak",
+        "isBlock": true,
+        "category": "structure",
+        "defaultSelected": true,
+        "shortcut": [],
+        "text": "",
+        "properties": [],
+        "role": "structure",
+        "behaviour": "zeroPoint"
+      },
+      {
+        "type": "cell",
+        "editorRole": "tableCell",
+        "isBlock": true,
+        "category": "structure",
+        "defaultSelected": true,
+        "shortcut": [],
+        "text": "",
+        "properties": [
+          {
+            "name": "cols",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "rows",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "structure",
+        "behaviour": "range"
+      },
+      {
+        "type": "list",
+        "editorRole": "bulletList",
+        "isBlock": true,
+        "category": "structure",
+        "defaultSelected": true,
+        "shortcut": [],
+        "text": "",
+        "properties": [],
+        "role": "structure",
+        "behaviour": "range"
+      },
+      {
+        "type": "item",
+        "editorRole": "listItem",
+        "isBlock": true,
+        "category": "structure",
+        "defaultSelected": true,
+        "shortcut": [],
+        "text": "",
+        "properties": [],
+        "role": "structure",
+        "behaviour": "range"
+      },
+      {
+        "type": "div-letter",
+        "isBlock": true,
+        "contains": [
+          "opener",
+          "closer",
+          "postscript",
+          "head",
+          "lg-poem",
+          "lg",
+          "received",
+          "dateline",
+          "salute",
+          "note-receipt",
+          "p",
+          "list",
+          "div"
+        ],
+        "topLevel": true,
+        "priority": 110,
+        "properties": [
+          {
+            "name": "lang",
+            "type": "string",
+            "options": ["lat"],
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "shortcut": [],
+        "text": "",
+        "category": "structure",
+        "defaultSelected": true,
+        "role": "semanticBlock",
+        "behaviour": "range"
+      },
+      {
+        "type": "div",
+        "isBlock": true,
+        "contains": ["head", "p", "list", "lg", "lg-poem", "div"],
+        "topLevel": true,
+        "priority": 105,
+        "properties": [
+          {
+            "name": "lang",
+            "type": "string",
+            "options": ["deu", "fra", "lat", "ita"],
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "shortcut": [],
+        "text": "",
+        "category": "structure",
+        "defaultSelected": true,
+        "role": "semanticBlock",
+        "behaviour": "range"
+      },
+      {
+        "type": "opener",
+        "isBlock": true,
+        "contains": ["dateline", "salute", "addrLine", "address"],
+        "topLevel": true,
+        "priority": 70,
+        "properties": [],
+        "shortcut": [],
+        "text": "",
+        "category": "structure",
+        "defaultSelected": true,
+        "role": "semanticBlock",
+        "behaviour": "range"
+      },
+      {
+        "type": "closer",
+        "isBlock": true,
+        "contains": ["dateline", "salute", "addrLine", "address", "signed"],
+        "topLevel": true,
+        "priority": 70,
+        "properties": [],
+        "shortcut": [],
+        "text": "",
+        "category": "structure",
+        "defaultSelected": true,
+        "role": "semanticBlock",
+        "behaviour": "range"
+      },
+      {
+        "type": "postscript",
+        "isBlock": true,
+        "contains": ["salute", "dateline", "p"],
+        "topLevel": true,
+        "priority": 65,
+        "properties": [],
+        "shortcut": [],
+        "text": "",
+        "category": "structure",
+        "defaultSelected": true,
+        "role": "semanticBlock",
+        "behaviour": "range"
+      },
+      {
+        "type": "note-receipt",
+        "isBlock": true,
+        "contains": [],
+        "topLevel": true,
+        "priority": 55,
+        "properties": [
+          {
+            "name": "hand",
+            "type": "string",
+            "options": ["#author", "#addressee", "#unknown"],
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "place",
+            "type": "string",
+            "options": ["mTop", "mBottom", "left", "right", "mInline"],
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "shortcut": [],
+        "text": "",
+        "category": "structure",
+        "defaultSelected": true,
+        "role": "semanticBlock",
+        "behaviour": "range"
+      },
+      {
+        "type": "head",
+        "isBlock": true,
+        "contains": [],
+        "topLevel": true,
+        "priority": 60,
+        "properties": [],
+        "shortcut": [],
+        "text": "",
+        "category": "structure",
+        "defaultSelected": true,
+        "role": "semanticBlock",
+        "behaviour": "range"
+      },
+      {
+        "type": "dateline",
+        "isBlock": true,
+        "contains": [],
+        "topLevel": true,
+        "priority": 55,
+        "properties": [
+          {
+            "name": "rendition",
+            "type": "string",
+            "options": ["#right"],
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "shortcut": [],
+        "text": "",
+        "category": "structure",
+        "defaultSelected": true,
+        "role": "semanticBlock",
+        "behaviour": "range"
+      },
+      {
+        "type": "salute",
+        "isBlock": true,
+        "contains": [],
+        "topLevel": true,
+        "priority": 55,
+        "properties": [],
+        "shortcut": [],
+        "text": "",
+        "category": "structure",
+        "defaultSelected": true,
+        "role": "semanticBlock",
+        "behaviour": "range"
+      },
+      {
+        "type": "signed",
+        "isBlock": true,
+        "contains": [],
+        "topLevel": true,
+        "priority": 50,
+        "properties": [],
+        "shortcut": [],
+        "text": "",
+        "category": "structure",
+        "defaultSelected": true,
+        "role": "semanticBlock",
+        "behaviour": "range"
+      },
+      {
+        "type": "lg-poem",
+        "isBlock": true,
+        "contains": ["l", "lg", "lg-poem"],
+        "topLevel": true,
+        "priority": 80,
+        "properties": [],
+        "shortcut": [],
+        "text": "",
+        "category": "structure",
+        "defaultSelected": true,
+        "role": "semanticBlock",
+        "behaviour": "range"
+      },
+      {
+        "type": "lg",
+        "isBlock": true,
+        "contains": ["l", "lg"],
+        "topLevel": true,
+        "priority": 75,
+        "properties": [
+          {
+            "name": "lang",
+            "type": "string",
+            "options": ["grc", "lat"],
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "shortcut": [],
+        "text": "",
+        "category": "structure",
+        "defaultSelected": true,
+        "role": "semanticBlock",
+        "behaviour": "range"
+      },
+      {
+        "type": "l",
+        "isBlock": true,
+        "contains": [],
+        "topLevel": false,
+        "priority": 65,
+        "properties": [
+          {
+            "name": "n",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "shortcut": [],
+        "text": "",
+        "category": "structure",
+        "defaultSelected": true,
+        "role": "semanticBlock",
+        "behaviour": "range"
+      },
+      {
+        "type": "list",
+        "isBlock": true,
+        "contains": ["item"],
+        "topLevel": true,
+        "priority": 75,
+        "properties": [],
+        "shortcut": [],
+        "text": "",
+        "category": "structure",
+        "defaultSelected": true,
+        "role": "structure",
+        "behaviour": "range"
+      },
+      {
+        "type": "item",
+        "isBlock": true,
+        "contains": [],
+        "topLevel": false,
+        "priority": 70,
+        "properties": [],
+        "shortcut": [],
+        "text": "",
+        "category": "structure",
+        "defaultSelected": true,
+        "role": "structure",
+        "behaviour": "range"
+      },
+      {
+        "type": "address",
+        "isBlock": true,
+        "contains": ["addrLine"],
+        "topLevel": false,
+        "priority": 50,
+        "properties": [],
+        "shortcut": [],
+        "text": "",
+        "category": "structure",
+        "defaultSelected": true,
+        "role": "semanticBlock",
+        "behaviour": "range"
+      },
+      {
+        "type": "addrLine",
+        "isBlock": true,
+        "contains": [],
+        "topLevel": false,
+        "priority": 45,
+        "properties": [],
+        "shortcut": [],
+        "text": "",
+        "category": "structure",
+        "defaultSelected": true,
+        "role": "semanticBlock",
+        "behaviour": "range"
+      },
+      {
+        "type": "row",
+        "isBlock": true,
+        "contains": ["cell"],
+        "topLevel": false,
+        "priority": 30,
+        "properties": [],
+        "shortcut": [],
+        "text": "",
+        "category": "structure",
+        "defaultSelected": true,
+        "role": "structure",
+        "behaviour": "range"
+      },
+      {
+        "type": "cell",
+        "isBlock": true,
+        "contains": [],
+        "topLevel": false,
+        "priority": 25,
+        "properties": [],
+        "shortcut": [],
+        "text": "",
+        "category": "structure",
+        "defaultSelected": true,
+        "role": "semanticBlock",
+        "behaviour": "range"
+      },
+      {
+        "type": "table",
+        "isBlock": true,
+        "contains": ["row"],
+        "topLevel": true,
+        "priority": 40,
+        "properties": [
+          {
+            "name": "cols",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "rows",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "shortcut": [],
+        "text": "",
+        "category": "structure",
+        "defaultSelected": true,
+        "role": "structure",
+        "behaviour": "range"
+      },
+      {
+        "type": "add",
+        "isBlock": false,
+        "category": "edition",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": true,
+        "properties": [
+          {
+            "name": "place",
+            "type": "string",
+            "options": ["superlinear", "sublinear", "intralinear", "left", "right", "mBottom", "across"],
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "del",
+        "isBlock": false,
+        "category": "edition",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": true,
+        "properties": [
+          {
+            "name": "rendition",
+            "type": "string",
+            "options": ["#s", "#erased", "#ow"],
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "subst",
+        "isBlock": false,
+        "category": "edition",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": false,
+        "properties": [
+          {
+            "name": "del",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "sic",
+        "isBlock": false,
+        "category": "edition",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": true,
+        "properties": [
+          {
+            "name": "certainty",
+            "type": "string",
+            "options": ["high", "low"],
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "correction",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "isDeleted",
+            "type": "string",
+            "options": ["true", "false"],
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "unclear",
+        "isBlock": false,
+        "category": "edition",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": true,
+        "properties": [
+          {
+            "name": "reason",
+            "type": "string",
+            "options": ["illegible", "covered"],
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "cert",
+            "type": "string",
+            "options": ["high", "low"],
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "gap",
+        "isBlock": false,
+        "category": "edition",
+        "defaultSelected": true,
+        "isZeroPoint": true,
+        "hasAdditionalTexts": false,
+        "properties": [
+          {
+            "name": "reason",
+            "type": "string",
+            "options": ["illegible", "lost", "empty", "covered"],
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "unit",
+            "type": "string",
+            "options": ["chars", "words", "lines", "pages"],
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "quantity",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "zeroPoint"
+      },
+      {
+        "type": "supplied",
+        "isBlock": false,
+        "category": "edition",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": false,
+        "properties": [
+          {
+            "name": "reason",
+            "type": "string",
+            "options": ["covered", "damage"],
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "cert",
+            "type": "string",
+            "options": ["high", "low"],
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "abbr",
+        "isBlock": false,
+        "category": "edition",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": false,
+        "properties": [
+          {
+            "name": "expansion",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "expan",
+        "isBlock": false,
+        "category": "edition",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": false,
+        "properties": [],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "orig",
+        "isBlock": false,
+        "category": "edition",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": false,
+        "properties": [],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "choice",
+        "isBlock": false,
+        "category": "edition",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": false,
+        "properties": [],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "corr",
+        "isBlock": false,
+        "category": "edition",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": false,
+        "properties": [
+          {
+            "name": "cert",
+            "type": "string",
+            "options": ["high", "low"],
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "reg",
+        "isBlock": false,
+        "category": "edition",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": false,
+        "properties": [
+          {
+            "name": "regularisation",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "hi",
+        "isBlock": false,
+        "category": "edition",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": false,
+        "properties": [
+          {
+            "name": "rendition",
+            "type": "string",
+            "options": ["#b", "#i", "#u", "#g", "#k", "#k #g", "#aq", "#fr", "#sup", "#sub"],
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "foreign",
+        "isBlock": false,
+        "category": "edition",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": false,
+        "properties": [
+          {
+            "name": "lang",
+            "type": "string",
+            "options": ["deu", "lat", "grc", "fra", "ita", "spa", "eng", "pol", "heb", "rus", "nld", "ara-Latn"],
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "metamark",
+        "isBlock": false,
+        "category": "edition",
+        "defaultSelected": true,
+        "isZeroPoint": true,
+        "hasAdditionalTexts": true,
+        "properties": [
+          {
+            "name": "function",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "zeroPoint"
+      },
+      {
+        "type": "date",
+        "isBlock": false,
+        "category": "edition",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": false,
+        "properties": [
+          {
+            "name": "when",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "calendar",
+            "type": "string",
+            "options": ["#Gregorian", "#Julian"],
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "cert",
+            "type": "string",
+            "options": ["high", "low"],
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "from",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "to",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "pb",
+        "isBlock": false,
+        "category": "layout",
+        "defaultSelected": true,
+        "isZeroPoint": true,
+        "hasAdditionalTexts": false,
+        "properties": [
+          {
+            "name": "n",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "url",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "facs",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "zeroPoint"
+      },
+      {
+        "type": "cb",
+        "isBlock": false,
+        "category": "layout",
+        "defaultSelected": true,
+        "isZeroPoint": true,
+        "hasAdditionalTexts": false,
+        "properties": [
+          {
+            "name": "n",
+            "type": "string",
+            "options": ["1", "2", "b"],
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "zeroPoint"
+      },
+      {
+        "type": "cb-start",
+        "isBlock": false,
+        "category": "layout",
+        "defaultSelected": true,
+        "isZeroPoint": true,
+        "hasAdditionalTexts": false,
+        "properties": [],
+        "role": "inline",
+        "behaviour": "zeroPoint"
+      },
+      {
+        "type": "cb-end",
+        "isBlock": false,
+        "category": "layout",
+        "defaultSelected": true,
+        "isZeroPoint": true,
+        "hasAdditionalTexts": false,
+        "properties": [],
+        "role": "inline",
+        "behaviour": "zeroPoint"
+      },
+      {
+        "type": "fw-folNum",
+        "isBlock": false,
+        "category": "layout",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": false,
+        "properties": [
+          {
+            "name": "place",
+            "type": "string",
+            "options": ["top", "bottom", "topLeft", "topRight", "bottomLeft", "bottomRight"],
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "persName",
+        "isBlock": false,
+        "category": "entities",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasEntities": true,
+        "entityNodes": ["Person"],
+        "hasAdditionalTexts": true,
+        "properties": [
+          {
+            "name": "key",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "placeName",
+        "isBlock": false,
+        "category": "entities",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasEntities": true,
+        "entityNodes": ["Place"],
+        "hasAdditionalTexts": true,
+        "properties": [
+          {
+            "name": "key",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "rs-person",
+        "isBlock": false,
+        "category": "entities",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasEntities": true,
+        "entityNodes": ["Person"],
+        "hasAdditionalTexts": true,
+        "properties": [
+          {
+            "name": "key",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "rs-place",
+        "isBlock": false,
+        "category": "entities",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasEntities": true,
+        "entityNodes": ["Place"],
+        "hasAdditionalTexts": true,
+        "properties": [
+          {
+            "name": "key",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "rs-term",
+        "isBlock": false,
+        "category": "entities",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasEntities": true,
+        "entityNodes": ["Term"],
+        "hasAdditionalTexts": true,
+        "properties": [
+          {
+            "name": "key",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "rs-letter",
+        "isBlock": false,
+        "category": "entities",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasEntities": true,
+        "entityNodes": ["Letter"],
+        "hasAdditionalTexts": true,
+        "properties": [
+          {
+            "name": "key",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "rs-comet",
+        "isBlock": false,
+        "category": "entities",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasEntities": true,
+        "entityNodes": ["Comet"],
+        "hasAdditionalTexts": true,
+        "properties": [
+          {
+            "name": "key",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "name-subjectIndexTerm",
+        "isBlock": false,
+        "category": "entities",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasEntities": true,
+        "entityNodes": ["Term"],
+        "hasAdditionalTexts": true,
+        "properties": [
+          {
+            "name": "key",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "bibl",
+        "isBlock": false,
+        "category": "sources",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": true,
+        "properties": [
+          {
+            "name": "sameAs",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "biblScope",
+        "isBlock": false,
+        "category": "sources",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": false,
+        "properties": [
+          {
+            "name": "unit",
+            "type": "string",
+            "options": ["pages"],
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "ref",
+        "isBlock": false,
+        "category": "sources",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": false,
+        "properties": [
+          {
+            "name": "target",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "seeAlso",
+        "isBlock": false,
+        "category": "sources",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": true,
+        "properties": [
+          {
+            "name": "target",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "anchor",
+        "isBlock": false,
+        "category": "sources",
+        "defaultSelected": true,
+        "isZeroPoint": true,
+        "hasAdditionalTexts": false,
+        "properties": [
+          {
+            "name": "id",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "zeroPoint"
+      },
+      {
+        "type": "rs-comment",
+        "isBlock": false,
+        "category": "sources",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": true,
+        "properties": [
+          {
+            "name": "key",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "note",
+        "isBlock": false,
+        "category": "project",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": true,
+        "properties": [
+          {
+            "name": "type",
+            "type": "string",
+            "options": ["marginal", "footnote", "endnote", "interlinear"],
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "place",
+            "type": "string",
+            "options": ["mTop", "mTop left", "mTop right", "mBottom", "left", "right", "mInline"],
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "hand",
+            "type": "string",
+            "options": ["#author", "#addressee", "#unknown", "#Kuyper"],
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "id",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "n",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "commented",
+        "isBlock": false,
+        "category": "project",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": true,
+        "properties": [
+          {
+            "name": "key",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "seg-comment",
+        "isBlock": false,
+        "category": "project",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": true,
+        "properties": [],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "normdata",
+        "isBlock": false,
+        "category": "project",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": false,
+        "properties": [
+          {
+            "name": "ref",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "identifier",
+            "type": "string",
+            "options": ["gndId", "wikidataId", "geoId", "simbadId", "sbdbId", "emloId"],
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "url",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "altLabel",
+        "isBlock": false,
+        "category": "project",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": false,
+        "properties": [
+          {
+            "name": "value",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "forename",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "surname",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "subOf",
+        "isBlock": false,
+        "category": "project",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": false,
+        "properties": [],
+        "role": "inline",
+        "behaviour": "range"
+      }
+    ],
+    "properties": {
+      "system": [
+        {
+          "name": "type",
+          "type": "string",
+          "required": true,
+          "editable": false,
+          "visible": true
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "required": true,
+          "editable": false,
+          "visible": true
+        }
+      ],
+      "base": []
+    },
+    "entities": [
+      {
+        "category": "persons",
+        "nodeLabel": "Person"
+      },
+      {
+        "category": "places",
+        "nodeLabel": "Place"
+      },
+      {
+        "category": "terms",
+        "nodeLabel": "Term"
+      },
+      {
+        "category": "bibleVerses",
+        "nodeLabel": "BibleVerse"
+      },
+      {
+        "category": "letters",
+        "nodeLabel": "Letter"
+      },
+      {
+        "category": "comets",
+        "nodeLabel": "Comet"
+      }
+    ],
+    "additionalTexts": []
+  }
+}

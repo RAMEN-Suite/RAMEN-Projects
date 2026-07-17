@@ -1,0 +1,159 @@
+{
+  "entities": {
+    "initial": "Person",
+    "options": [
+      {
+        "icon": "pi pi-user",
+        "label": "entities.person.label",
+        "value": "Person"
+      },
+      {
+        "icon": "pi pi-users",
+        "label": "entities.organisation.label",
+        "value": "Organisation"
+      },
+      {
+        "icon": "pi pi-map",
+        "label": "entities.place.label",
+        "value": "Place"
+      },
+      {
+        "icon": "pi pi-book",
+        "label": "entities.bibleVerse.label",
+        "value": "BibleVerse",
+        "index": "bible"
+      },
+      {
+        "icon": "pi pi-tags",
+        "label": "entities.term.label",
+        "value": "Term"
+      }
+    ],
+    "properties": [
+      {
+        "name": "mentions",
+        "display": "entities.properties.mentions"
+      },
+      {
+        "name": "remarks",
+        "display": "entities.properties.remarks"
+      }
+    ]
+  },
+  "collections": {
+    "initial": "Letter",
+    "options": [
+      {
+        "icon": "pi pi-folder",
+        "label": "collections.letter.label",
+        "value": "Letter",
+        "properties": [
+          {
+            "name": "status",
+            "display": "collections.letter.properties.status.display",
+            "valueMap": {
+              "0-final": "collections.letter.properties.status.final",
+              "1-transcription": "collections.letter.properties.status.transcription",
+              "2-draft": "collections.letter.properties.status.draft"
+            }
+          }
+        ],
+        "sort": {
+          "initial": "status",
+          "direction": "asc",
+          "options": [
+            {
+              "identifier": "status",
+              "icon": "pi pi-tag",
+              "label": "collections.letter.sort.status",
+              "value": [
+                {
+                  "field": "status",
+                  "direction": "asc"
+                },
+                {
+                  "field": "annotation[sent].dateStart",
+                  "direction": "asc"
+                }
+              ]
+            },
+            {
+              "identifier": "dateStart",
+              "icon": "pi pi-calendar",
+              "label": "collections.letter.sort.sent",
+              "value": "annotation[sent].dateStart"
+            },
+            {
+              "identifier": "sender",
+              "icon": "pi pi-user",
+              "label": "collections.letter.sort.sender",
+              "value": [
+                {
+                  "field": "annotation[sent].refers[Person].label",
+                  "direction": "asc"
+                },
+                {
+                  "field": "annotation[sent].dateStart",
+                  "direction": "asc"
+                }
+              ]
+            },
+            {
+              "identifier": "recipient",
+              "icon": "pi pi-user",
+              "label": "collections.letter.sort.recipient",
+              "value": [
+                {
+                  "field": "annotation[received].refers[Person].label",
+                  "direction": "asc"
+                },
+                {
+                  "field": "annotation[sent].dateStart",
+                  "direction": "asc"
+                }
+              ]
+            }
+          ]
+        },
+        "filters": [
+          {
+            "icon": "pi pi-tag",
+            "label": "collections.letter.filters.status",
+            "value": "status",
+            "valueMap": {
+              "0-final": "collections.letter.properties.status.final",
+              "1-transcription": "collections.letter.properties.status.transcription",
+              "2-draft": "collections.letter.properties.status.draft"
+            }
+          },
+          {
+            "icon": "pi pi-user",
+            "label": "collections.letter.filters.sender",
+            "value": "annotation[sent].refers[Person].label"
+          },
+          {
+            "icon": "pi pi-user",
+            "label": "collections.letter.filters.recipient",
+            "value": "annotation[received].refers[Person].label"
+          },
+          {
+            "icon": "pi pi-map-marker",
+            "label": "collections.letter.filters.from",
+            "value": "annotation[sent].refers[Place].label"
+          },
+          {
+            "icon": "pi pi-language",
+            "label": "collections.letter.filters.languages.title",
+            "value": "children[Witness].language",
+            "valueMap": {
+              "deu": "collections.letter.filters.languages.deu",
+              "nld": "collections.letter.filters.languages.nld",
+              "nld deu": "collections.letter.filters.languages.nld_deu",
+              "deu fra": "collections.letter.filters.languages.deu_fra"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,958 @@
+{
+    "$schema": "https://ramen-schema.org/gcore/1.0.0/schema.json",
+    "$id": "https://example.com/",
+    "id": "LRrbxSQcyjwJ2iTB",
+    "version": "1.0.0",
+    "kind": "GModel",
+    "name": "Digital Edition",
+    "imports": [
+        {
+            "schemaId": "https://ramen-schema.org/ramen/1.0.0/schema.json",
+            "modelId": "lW611f30a2ky4276g3l8N",
+            "name": "RAMEN"
+        }
+    ],
+    "classifiers": [
+        {
+            "kind": "GNode",
+            "id": "myq4cdOQljLMBdSf",
+            "name": "Letter",
+            "superTypes": [
+                "lW611f30a2ky4276g3l8N:aP3xK8nV1qR6tY2uZ9wB"
+            ],
+            "attributes": [
+                {
+                    "name": "xmlDownload",
+                    "typeId": "String",
+                    "bounds": {
+                        "lowerBound": 0,
+                        "upperBound": 1
+                    },
+                    "isKey": false,
+                    "isReadOnly": false,
+                    "isUnique": false,
+                    "isOrdered": false,
+                    "constraints": [],
+                    "ext": {}
+                },
+                {
+                    "name": "number",
+                    "typeId": "Integer",
+                    "bounds": {
+                        "lowerBound": 0,
+                        "upperBound": 1
+                    },
+                    "isKey": false,
+                    "isReadOnly": false,
+                    "isUnique": false,
+                    "isOrdered": false,
+                    "constraints": [],
+                    "ext": {}
+                },
+                {
+                    "name": "status",
+                    "typeId": "String",
+                    "bounds": {
+                        "lowerBound": 0,
+                        "upperBound": 1
+                    },
+                    "isKey": false,
+                    "isReadOnly": false,
+                    "isUnique": false,
+                    "isOrdered": false,
+                    "constraints": [],
+                    "ext": {}
+                },
+                {
+                    "name": "editor",
+                    "typeId": "String",
+                    "bounds": {
+                        "lowerBound": 0,
+                        "upperBound": 1
+                    },
+                    "isKey": false,
+                    "isReadOnly": false,
+                    "isUnique": false,
+                    "isOrdered": false,
+                    "constraints": [],
+                    "ext": {}
+                }
+            ],
+            "constraints": [],
+            "ext": {}
+        },
+        {
+            "kind": "GNode",
+            "id": "XWeg4hdxSgXzjAXT",
+            "name": "Witness",
+            "superTypes": [
+                "lW611f30a2ky4276g3l8N:aP3xK8nV1qR6tY2uZ9wB"
+            ],
+            "attributes": [
+                {
+                    "name": "license",
+                    "typeId": "String",
+                    "bounds": {
+                        "lowerBound": 0,
+                        "upperBound": 1
+                    },
+                    "isKey": false,
+                    "isReadOnly": false,
+                    "isUnique": false,
+                    "isOrdered": false,
+                    "constraints": [],
+                    "ext": {}
+                },
+                {
+                    "name": "isReference",
+                    "typeId": "Boolean",
+                    "bounds": {
+                        "lowerBound": 0,
+                        "upperBound": 1
+                    },
+                    "isKey": false,
+                    "isReadOnly": false,
+                    "isUnique": false,
+                    "isOrdered": false,
+                    "constraints": [],
+                    "ext": {}
+                },
+                {
+                    "name": "textType",
+                    "typeId": "String",
+                    "bounds": {
+                        "lowerBound": 0,
+                        "upperBound": 1
+                    },
+                    "isKey": false,
+                    "isReadOnly": false,
+                    "isUnique": false,
+                    "isOrdered": false,
+                    "constraints": [],
+                    "ext": {}
+                },
+                {
+                    "name": "language",
+                    "typeId": "String",
+                    "bounds": {
+                        "lowerBound": 0,
+                        "upperBound": 1
+                    },
+                    "isKey": false,
+                    "isReadOnly": false,
+                    "isUnique": false,
+                    "isOrdered": false,
+                    "constraints": [],
+                    "ext": {}
+                },
+                {
+                    "name": "extent",
+                    "typeId": "String",
+                    "bounds": {
+                        "lowerBound": 0,
+                        "upperBound": 1
+                    },
+                    "isKey": false,
+                    "isReadOnly": false,
+                    "isUnique": false,
+                    "isOrdered": false,
+                    "constraints": [],
+                    "ext": {}
+                },
+                {
+                    "name": "archive",
+                    "typeId": "String",
+                    "bounds": {
+                        "lowerBound": 0,
+                        "upperBound": 1
+                    },
+                    "isKey": false,
+                    "isReadOnly": false,
+                    "isUnique": false,
+                    "isOrdered": false,
+                    "constraints": [],
+                    "ext": {}
+                },
+                {
+                    "name": "shelfmark",
+                    "typeId": "String",
+                    "bounds": {
+                        "lowerBound": 0,
+                        "upperBound": 1
+                    },
+                    "isKey": false,
+                    "isReadOnly": false,
+                    "isUnique": false,
+                    "isOrdered": false,
+                    "constraints": [],
+                    "ext": {}
+                },
+                {
+                    "name": "collection",
+                    "typeId": "String",
+                    "bounds": {
+                        "lowerBound": 0,
+                        "upperBound": 1
+                    },
+                    "isKey": false,
+                    "isReadOnly": false,
+                    "isUnique": false,
+                    "isOrdered": false,
+                    "constraints": [],
+                    "ext": {}
+                }
+            ],
+            "constraints": [],
+            "ext": {}
+        },
+        {
+            "kind": "GNode",
+            "id": "2sE18zuwrCtps0lk",
+            "name": "Text",
+            "superTypes": [
+                "lW611f30a2ky4276g3l8N:Z4kq1M8sV0bN2xR7pT6u"
+            ],
+            "attributes": [
+                {
+                    "name": "text",
+                    "typeId": "String",
+                    "bounds": {
+                        "lowerBound": 0,
+                        "upperBound": 1
+                    },
+                    "isKey": false,
+                    "isReadOnly": false,
+                    "isUnique": false,
+                    "isOrdered": false,
+                    "constraints": [],
+                    "ext": {}
+                }
+            ],
+            "constraints": [],
+            "ext": {}
+        },
+        {
+            "kind": "GNode",
+            "id": "Dol4RFyYsnQYqiX0",
+            "name": "Annotation",
+            "superTypes": [
+                "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3"
+            ],
+            "attributes": [
+              {
+                "name": "kind",
+                "typeId": "String",
+                "bounds": {
+                  "lowerBound": 0,
+                  "upperBound": 1
+                },
+                "isKey": false,
+                "isReadOnly": false,
+                "isUnique": false,
+                "isOrdered": false,
+                "constraints": [],
+                "ext": {}
+              },
+              {
+                "name": "note",
+                "typeId": "String",
+                "bounds": {
+                  "lowerBound": 0,
+                  "upperBound": 1
+                },
+                "isKey": false,
+                "isReadOnly": false,
+                "isUnique": false,
+                "isOrdered": false,
+                "constraints": [],
+                "ext": {}
+              },
+              {
+                "name": "label",
+                "typeId": "String",
+                "bounds": {
+                  "lowerBound": 0,
+                  "upperBound": 1
+                },
+                "isKey": false,
+                "isReadOnly": false,
+                "isUnique": false,
+                "isOrdered": false,
+                "constraints": [],
+                "ext": {}
+              },
+              {
+                "name": "altLabel",
+                "typeId": "String",
+                "bounds": {
+                  "lowerBound": 0,
+                  "upperBound": 1
+                },
+                "isKey": false,
+                "isReadOnly": false,
+                "isUnique": false,
+                "isOrdered": false,
+                "constraints": [],
+                "ext": {}
+              },
+              {
+                "name": "description",
+                "typeId": "String",
+                "bounds": {
+                  "lowerBound": 0,
+                  "upperBound": 1
+                },
+                "isKey": false,
+                "isReadOnly": false,
+                "isUnique": false,
+                "isOrdered": false,
+                "constraints": [],
+                "ext": {}
+              },
+              {
+                "name": "normdata",
+                "typeId": "String",
+                "bounds": {
+                  "lowerBound": 0,
+                  "upperBound": 1
+                },
+                "isKey": false,
+                "isReadOnly": false,
+                "isUnique": false,
+                "isOrdered": false,
+                "constraints": [],
+                "ext": {}
+              },
+              {
+                "name": "namespace",
+                "typeId": "String",
+                "bounds": {
+                  "lowerBound": 0,
+                  "upperBound": 1
+                },
+                "isKey": false,
+                "isReadOnly": false,
+                "isUnique": false,
+                "isOrdered": false,
+                "constraints": [],
+                "ext": {}
+              },
+              {
+                "name": "identifier",
+                "typeId": "String",
+                "bounds": {
+                  "lowerBound": 0,
+                  "upperBound": 1
+                },
+                "isKey": false,
+                "isReadOnly": false,
+                "isUnique": false,
+                "isOrdered": false,
+                "constraints": [],
+                "ext": {}
+              },
+              {
+                "name": "url",
+                "typeId": "String",
+                "bounds": {
+                  "lowerBound": 0,
+                  "upperBound": 1
+                },
+                "isKey": false,
+                "isReadOnly": false,
+                "isUnique": false,
+                "isOrdered": false,
+                "constraints": [],
+                "ext": {}
+              },
+              {
+                "name": "relation",
+                "typeId": "String",
+                "bounds": {
+                  "lowerBound": 0,
+                  "upperBound": 1
+                },
+                "isKey": false,
+                "isReadOnly": false,
+                "isUnique": false,
+                "isOrdered": false,
+                "constraints": [],
+                "ext": {}
+              },
+              {
+                "name": "seeAlso",
+                "typeId": "String",
+                "bounds": {
+                  "lowerBound": 0,
+                  "upperBound": 1
+                },
+                "isKey": false,
+                "isReadOnly": false,
+                "isUnique": false,
+                "isOrdered": false,
+                "constraints": [],
+                "ext": {}
+              }
+            ],
+            "constraints": [],
+            "ext": {}
+        },
+        {
+            "kind": "GNode",
+            "id": "kLdnwf9qBVDZkgzc",
+            "name": "Person",
+            "superTypes": [
+                "lW611f30a2ky4276g3l8N:n7Vb2Qx0Lm9P3sT6yK1h"
+            ],
+            "attributes": [
+                {
+                    "name": "forename",
+                    "typeId": "String",
+                    "bounds": {
+                        "lowerBound": 0,
+                        "upperBound": 1
+                    },
+                    "isKey": false,
+                    "isReadOnly": false,
+                    "isUnique": false,
+                    "isOrdered": false,
+                    "constraints": [],
+                    "ext": {}
+                },
+                {
+                    "name": "death",
+                    "typeId": "String",
+                    "bounds": {
+                        "lowerBound": 0,
+                        "upperBound": 1
+                    },
+                    "isKey": false,
+                    "isReadOnly": false,
+                    "isUnique": false,
+                    "isOrdered": false,
+                    "constraints": [],
+                    "ext": {}
+                },
+                {
+                    "name": "surname",
+                    "typeId": "String",
+                    "bounds": {
+                        "lowerBound": 0,
+                        "upperBound": 1
+                    },
+                    "isKey": false,
+                    "isReadOnly": false,
+                    "isUnique": false,
+                    "isOrdered": false,
+                    "constraints": [],
+                    "ext": {}
+                },
+                {
+                    "name": "birth",
+                    "typeId": "String",
+                    "bounds": {
+                        "lowerBound": 0,
+                        "upperBound": 1
+                    },
+                    "isKey": false,
+                    "isReadOnly": false,
+                    "isUnique": false,
+                    "isOrdered": false,
+                    "constraints": [],
+                    "ext": {}
+                },
+                {
+                    "name": "mentions",
+                    "typeId": "Integer",
+                    "bounds": {
+                        "lowerBound": 0,
+                        "upperBound": 1
+                    },
+                    "isKey": false,
+                    "isReadOnly": true,
+                    "isUnique": false,
+                    "isOrdered": false,
+                    "constraints": [],
+                    "ext": {}
+                },
+                {
+                    "name": "remarks",
+                    "typeId": "Integer",
+                    "bounds": {
+                        "lowerBound": 0,
+                        "upperBound": 1
+                    },
+                    "isKey": false,
+                    "isReadOnly": true,
+                    "isUnique": false,
+                    "isOrdered": false,
+                    "constraints": [],
+                    "ext": {}
+                },
+                {
+                    "name": "floruitNotAfter",
+                    "typeId": "String",
+                    "bounds": {
+                        "lowerBound": 0,
+                        "upperBound": 1
+                    },
+                    "isKey": false,
+                    "isReadOnly": false,
+                    "isUnique": false,
+                    "isOrdered": false,
+                    "constraints": [],
+                    "ext": {}
+                },
+                {
+                    "name": "floruitNotBefore",
+                    "typeId": "String",
+                    "bounds": {
+                        "lowerBound": 0,
+                        "upperBound": 1
+                    },
+                    "isKey": false,
+                    "isReadOnly": false,
+                    "isUnique": false,
+                    "isOrdered": false,
+                    "constraints": [],
+                    "ext": {}
+                }
+            ],
+            "constraints": [],
+            "ext": {}
+        },
+        {
+            "kind": "GNode",
+            "id": "uhMIP8LJ10BA5jVW",
+            "name": "Place",
+            "superTypes": [
+                "lW611f30a2ky4276g3l8N:n7Vb2Qx0Lm9P3sT6yK1h"
+            ],
+            "attributes": [
+                {
+                    "name": "mentions",
+                    "typeId": "Integer",
+                    "bounds": {
+                        "lowerBound": 0,
+                        "upperBound": 1
+                    },
+                    "isKey": false,
+                    "isReadOnly": true,
+                    "isUnique": false,
+                    "isOrdered": false,
+                    "constraints": [],
+                    "ext": {}
+                },
+                {
+                    "name": "remarks",
+                    "typeId": "Integer",
+                    "bounds": {
+                        "lowerBound": 0,
+                        "upperBound": 1
+                    },
+                    "isKey": false,
+                    "isReadOnly": true,
+                    "isUnique": false,
+                    "isOrdered": false,
+                    "constraints": [],
+                    "ext": {}
+                }
+            ],
+            "constraints": [],
+            "ext": {}
+        },
+        {
+            "kind": "GNode",
+            "id": "jgh9eZi7drj89n5L",
+            "name": "Organisation",
+            "superTypes": [
+                "lW611f30a2ky4276g3l8N:n7Vb2Qx0Lm9P3sT6yK1h"
+            ],
+            "attributes": [
+                {
+                    "name": "mentions",
+                    "typeId": "Integer",
+                    "bounds": {
+                        "lowerBound": 0,
+                        "upperBound": 1
+                    },
+                    "isKey": false,
+                    "isReadOnly": true,
+                    "isUnique": false,
+                    "isOrdered": false,
+                    "constraints": [],
+                    "ext": {}
+                },
+                {
+                    "name": "remarks",
+                    "typeId": "Integer",
+                    "bounds": {
+                        "lowerBound": 0,
+                        "upperBound": 1
+                    },
+                    "isKey": false,
+                    "isReadOnly": true,
+                    "isUnique": false,
+                    "isOrdered": false,
+                    "constraints": [],
+                    "ext": {}
+                }
+            ],
+            "constraints": [],
+            "ext": {}
+        },
+        {
+            "kind": "GNode",
+            "id": "1UHJKOFcNnJWjMZo",
+            "name": "Term",
+            "superTypes": [
+                "lW611f30a2ky4276g3l8N:n7Vb2Qx0Lm9P3sT6yK1h"
+            ],
+            "attributes": [
+                {
+                    "name": "mentions",
+                    "typeId": "Integer",
+                    "bounds": {
+                        "lowerBound": 0,
+                        "upperBound": 1
+                    },
+                    "isKey": false,
+                    "isReadOnly": true,
+                    "isUnique": false,
+                    "isOrdered": false,
+                    "constraints": [],
+                    "ext": {}
+                },
+                {
+                    "name": "remarks",
+                    "typeId": "Integer",
+                    "bounds": {
+                        "lowerBound": 0,
+                        "upperBound": 1
+                    },
+                    "isKey": false,
+                    "isReadOnly": true,
+                    "isUnique": false,
+                    "isOrdered": false,
+                    "constraints": [],
+                    "ext": {}
+                }
+            ],
+            "constraints": [],
+            "ext": {}
+        },
+        {
+            "kind": "GNode",
+            "id": "xzvomcCzbaB6iAPY",
+            "name": "BibleVerse",
+            "superTypes": [
+                "lW611f30a2ky4276g3l8N:n7Vb2Qx0Lm9P3sT6yK1h"
+            ],
+            "attributes": [
+                {
+                    "name": "mentions",
+                    "typeId": "Integer",
+                    "bounds": {
+                        "lowerBound": 0,
+                        "upperBound": 1
+                    },
+                    "isKey": false,
+                    "isReadOnly": true,
+                    "isUnique": false,
+                    "isOrdered": false,
+                    "constraints": [],
+                    "ext": {}
+                },
+                {
+                    "name": "remarks",
+                    "typeId": "Integer",
+                    "bounds": {
+                        "lowerBound": 0,
+                        "upperBound": 1
+                    },
+                    "isKey": false,
+                    "isReadOnly": true,
+                    "isUnique": false,
+                    "isOrdered": false,
+                    "constraints": [],
+                    "ext": {}
+                }
+            ],
+            "constraints": [],
+            "ext": {}
+        }
+    ],
+    "relations": [
+        {
+            "kind": "GRelation",
+            "id": "X1wx3dgNM98jWkZe",
+            "superTypes": [
+                "lW611f30a2ky4276g3l8N:pX4sN1cDzK0mT3aL7vQ9"
+            ],
+            "name": "HAS_ANNOTATION",
+            "from": {
+                "nodeId": "2sE18zuwrCtps0lk",
+                "role": "_annotatesContent",
+                "bounds": {
+                    "lowerBound": 0,
+                    "upperBound": -1
+                },
+                "constraints": [],
+                "ext": {}
+            },
+            "to": {
+                "nodeId": "Dol4RFyYsnQYqiX0",
+                "role": "_annotations",
+                "bounds": {
+                    "lowerBound": 0,
+                    "upperBound": -1
+                },
+                "constraints": [],
+                "ext": {}
+            },
+            "constraints": [],
+            "ext": {}
+        },
+        {
+            "kind": "GRelation",
+            "id": "Ykh3Sz8apXoAnxhO",
+            "superTypes": [
+                "lW611f30a2ky4276g3l8N:K0mT3aL7vQ9pX4sN1cDz"
+            ],
+            "name": "PART_OF",
+            "from": {
+                "nodeId": "2sE18zuwrCtps0lk",
+                "role": "_content",
+                "bounds": {
+                    "lowerBound": 0,
+                    "upperBound": -1
+                },
+                "constraints": [],
+                "ext": {}
+            },
+            "to": {
+                "nodeId": "XWeg4hdxSgXzjAXT",
+                "role": "_collections",
+                "bounds": {
+                    "lowerBound": 0,
+                    "upperBound": -1
+                },
+                "constraints": [],
+                "ext": {}
+            },
+            "constraints": [],
+            "ext": {}
+        },
+        {
+            "kind": "GRelation",
+            "id": "R0zyjhrr8QBRkpvC",
+            "superTypes": [
+                "lW611f30a2ky4276g3l8N:V7pQ2xL9mR0sT6yK1nB3"
+            ],
+            "name": "PART_OF",
+            "from": {
+                "nodeId": "XWeg4hdxSgXzjAXT",
+                "role": "_collections",
+                "bounds": {
+                    "lowerBound": 0,
+                    "upperBound": -1
+                },
+                "constraints": [],
+                "ext": {}
+            },
+            "to": {
+                "nodeId": "myq4cdOQljLMBdSf",
+                "role": "_collectionOf",
+                "bounds": {
+                    "lowerBound": 0,
+                    "upperBound": -1
+                },
+                "constraints": [],
+                "ext": {}
+            },
+            "constraints": [],
+            "ext": {}
+        },
+        {
+            "kind": "GRelation",
+            "id": "w4kK9SGdb91BTHuF",
+            "superTypes": [
+                "lW611f30a2ky4276g3l8N:mR0sT6yK1nB3xV7pQ2xL9"
+            ],
+            "name": "REFERS_TO",
+            "from": {
+                "nodeId": "Dol4RFyYsnQYqiX0",
+                "role": "_referredToBy",
+                "bounds": {
+                    "lowerBound": 0,
+                    "upperBound": -1
+                },
+                "constraints": [],
+                "ext": {}
+            },
+            "to": {
+                "nodeId": "xzvomcCzbaB6iAPY",
+                "role": "_refersToEntities",
+                "bounds": {
+                    "lowerBound": 0,
+                    "upperBound": -1
+                },
+                "constraints": [],
+                "ext": {}
+            },
+            "constraints": [],
+            "ext": {}
+        },
+        {
+            "kind": "GRelation",
+            "id": "D9Ca2uMKzBVk7iLl",
+            "superTypes": [
+                "lW611f30a2ky4276g3l8N:mR0sT6yK1nB3xV7pQ2xL9"
+            ],
+            "name": "REFERS_TO",
+            "from": {
+                "nodeId": "Dol4RFyYsnQYqiX0",
+                "role": "_referredToBy",
+                "bounds": {
+                    "lowerBound": 0,
+                    "upperBound": -1
+                },
+                "constraints": [],
+                "ext": {}
+            },
+            "to": {
+                "nodeId": "jgh9eZi7drj89n5L",
+                "role": "_refersToEntities",
+                "bounds": {
+                    "lowerBound": 0,
+                    "upperBound": -1
+                },
+                "constraints": [],
+                "ext": {}
+            },
+            "constraints": [],
+            "ext": {}
+        },
+        {
+            "kind": "GRelation",
+            "id": "oPkrfQB9Q6Uu9Cry",
+            "superTypes": [
+                "lW611f30a2ky4276g3l8N:mR0sT6yK1nB3xV7pQ2xL9"
+            ],
+            "name": "REFERS_TO",
+            "from": {
+                "nodeId": "Dol4RFyYsnQYqiX0",
+                "role": "_referredToBy",
+                "bounds": {
+                    "lowerBound": 0,
+                    "upperBound": -1
+                },
+                "constraints": [],
+                "ext": {}
+            },
+            "to": {
+                "nodeId": "kLdnwf9qBVDZkgzc",
+                "role": "_refersToEntities",
+                "bounds": {
+                    "lowerBound": 0,
+                    "upperBound": -1
+                },
+                "constraints": [],
+                "ext": {}
+            },
+            "constraints": [],
+            "ext": {}
+        },
+        {
+            "kind": "GRelation",
+            "id": "Iv4kkXhRykWAOwKh",
+            "superTypes": [
+                "lW611f30a2ky4276g3l8N:mR0sT6yK1nB3xV7pQ2xL9"
+            ],
+            "name": "REFERS_TO",
+            "from": {
+                "nodeId": "Dol4RFyYsnQYqiX0",
+                "role": "_referredToBy",
+                "bounds": {
+                    "lowerBound": 0,
+                    "upperBound": -1
+                },
+                "constraints": [],
+                "ext": {}
+            },
+            "to": {
+                "nodeId": "uhMIP8LJ10BA5jVW",
+                "role": "_refersToEntities",
+                "bounds": {
+                    "lowerBound": 0,
+                    "upperBound": -1
+                },
+                "constraints": [],
+                "ext": {}
+            },
+            "constraints": [],
+            "ext": {}
+        },
+        {
+            "kind": "GRelation",
+            "id": "Uh93CwdsKzq0V3VR",
+            "superTypes": [
+                "lW611f30a2ky4276g3l8N:mR0sT6yK1nB3xV7pQ2xL9"
+            ],
+            "name": "REFERS_TO",
+            "from": {
+                "nodeId": "Dol4RFyYsnQYqiX0",
+                "role": "_referredToBy",
+                "bounds": {
+                    "lowerBound": 0,
+                    "upperBound": -1
+                },
+                "constraints": [],
+                "ext": {}
+            },
+            "to": {
+                "nodeId": "1UHJKOFcNnJWjMZo",
+                "role": "_refersToEntities",
+                "bounds": {
+                    "lowerBound": 0,
+                    "upperBound": -1
+                },
+                "constraints": [],
+                "ext": {}
+            },
+            "constraints": [],
+            "ext": {}
+        },
+        {
+            "kind": "GRelation",
+            "id": "pnHQ0MyaUsu8TtqP",
+            "superTypes": [
+                "lW611f30a2ky4276g3l8N:sT6yK1nB3xV7pQ2L9mR0"
+            ],
+            "name": "HAS_ANNOTATION",
+            "from": {
+                "nodeId": "myq4cdOQljLMBdSf",
+                "role": "_annotatesCollections",
+                "bounds": {
+                    "lowerBound": 0,
+                    "upperBound": -1
+                },
+                "constraints": [],
+                "ext": {}
+            },
+            "to": {
+                "nodeId": "Dol4RFyYsnQYqiX0",
+                "role": "_annotations",
+                "bounds": {
+                    "lowerBound": 0,
+                    "upperBound": -1
+                },
+                "constraints": [],
+                "ext": {}
+            },
+            "constraints": [],
+            "ext": {}
+        }
+    ],
+    "ext": {}
+}

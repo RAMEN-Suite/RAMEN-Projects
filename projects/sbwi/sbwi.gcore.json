@@ -1,0 +1,1194 @@
+{
+  "$schema": "https://ramen-schema.org/gcore/1.0.0/schema.json",
+  "$id": "https://example.com/",
+  "id": "ICDEwJJxCEOQ0Lnh",
+  "version": "1.0.0",
+  "kind": "GModel",
+  "name": "Socinian",
+  "imports": [
+    {
+      "schemaId": "https://ramen-schema.org/ramen/1.0.0/schema.json",
+      "modelId": "lW611f30a2ky4276g3l8N",
+      "name": "RAMEN"
+    }
+  ],
+  "classifiers": [
+    {
+      "kind": "GNode",
+      "id": "wyjK9j2FMYfV8NvG",
+      "name": "Corpus",
+      "superTypes": ["lW611f30a2ky4276g3l8N:aP3xK8nV1qR6tY2uZ9wB"],
+      "attributes": [],
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GNode",
+      "id": "Rd9Xrxyi9ToLBzj4",
+      "name": "Text",
+      "superTypes": ["lW611f30a2ky4276g3l8N:Z4kq1M8sV0bN2xR7pT6u"],
+      "attributes": [
+        {
+          "name": "text",
+          "typeId": "String",
+          "bounds": {
+            "lowerBound": 1,
+            "upperBound": 1
+          },
+          "isKey": false,
+          "isReadOnly": false,
+          "isUnique": false,
+          "isOrdered": false,
+          "constraints": [],
+          "ext": {}
+        }
+      ],
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GNode",
+      "id": "XGSpmeUfuyLIYWdE",
+      "name": "BibleVerse",
+      "superTypes": ["lW611f30a2ky4276g3l8N:n7Vb2Qx0Lm9P3sT6yK1h"],
+      "attributes": [],
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GNode",
+      "id": "EIbY6TdESxJG6bfH",
+      "name": "Term",
+      "superTypes": ["lW611f30a2ky4276g3l8N:n7Vb2Qx0Lm9P3sT6yK1h"],
+      "attributes": [],
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GNode",
+      "id": "ypbmZPtK6b7b1AGj",
+      "name": "Place",
+      "superTypes": ["lW611f30a2ky4276g3l8N:n7Vb2Qx0Lm9P3sT6yK1h"],
+      "attributes": [],
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GNode",
+      "id": "uJN0JGAn0ZK9Enfg",
+      "name": "Person",
+      "superTypes": ["lW611f30a2ky4276g3l8N:n7Vb2Qx0Lm9P3sT6yK1h"],
+      "attributes": [
+        {
+          "name": "death",
+          "typeId": "String",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": 1
+          },
+          "isKey": false,
+          "isReadOnly": false,
+          "isUnique": false,
+          "isOrdered": false,
+          "constraints": [],
+          "ext": {}
+        },
+        {
+          "name": "birth",
+          "typeId": "String",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": 1
+          },
+          "isKey": false,
+          "isReadOnly": false,
+          "isUnique": false,
+          "isOrdered": false,
+          "constraints": [],
+          "ext": {}
+        },
+        {
+          "name": "forename",
+          "typeId": "String",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": 1
+          },
+          "isKey": false,
+          "isReadOnly": false,
+          "isUnique": false,
+          "isOrdered": false,
+          "constraints": [],
+          "ext": {}
+        },
+        {
+          "name": "surname",
+          "typeId": "String",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": 1
+          },
+          "isKey": false,
+          "isReadOnly": false,
+          "isUnique": false,
+          "isOrdered": false,
+          "constraints": [],
+          "ext": {}
+        },
+        {
+          "name": "floruitNotAfter",
+          "typeId": "String",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": 1
+          },
+          "isKey": false,
+          "isReadOnly": false,
+          "isUnique": false,
+          "isOrdered": false,
+          "constraints": [],
+          "ext": {}
+        },
+        {
+          "name": "floruitNotBefore",
+          "typeId": "String",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": 1
+          },
+          "isKey": false,
+          "isReadOnly": false,
+          "isUnique": false,
+          "isOrdered": false,
+          "constraints": [],
+          "ext": {}
+        }
+      ],
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GNode",
+      "id": "fbzPvBoVvle1vtPa",
+      "name": "Letter",
+      "superTypes": ["lW611f30a2ky4276g3l8N:aP3xK8nV1qR6tY2uZ9wB"],
+      "attributes": [
+        {
+          "name": "editor",
+          "typeId": "String",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": 1
+          },
+          "isKey": false,
+          "isReadOnly": false,
+          "isUnique": false,
+          "isOrdered": false,
+          "constraints": [],
+          "ext": {}
+        },
+        {
+          "name": "status",
+          "typeId": "String",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": 1
+          },
+          "isKey": false,
+          "isReadOnly": false,
+          "isUnique": false,
+          "isOrdered": false,
+          "constraints": [],
+          "ext": {}
+        },
+        {
+          "name": "xmlDownload",
+          "typeId": "String",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": 1
+          },
+          "isKey": false,
+          "isReadOnly": false,
+          "isUnique": false,
+          "isOrdered": false,
+          "constraints": [],
+          "ext": {}
+        }
+      ],
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GNode",
+      "id": "v3qE1Hes3jvPQhI8",
+      "name": "Attachment",
+      "superTypes": ["lW611f30a2ky4276g3l8N:aP3xK8nV1qR6tY2uZ9wB"],
+      "attributes": [],
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GNode",
+      "id": "810GvS72dvKd4689",
+      "name": "Variant",
+      "superTypes": ["lW611f30a2ky4276g3l8N:aP3xK8nV1qR6tY2uZ9wB"],
+      "attributes": [
+        {
+          "name": "archive",
+          "typeId": "String",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": 1
+          },
+          "isKey": false,
+          "isReadOnly": false,
+          "isUnique": false,
+          "isOrdered": false,
+          "constraints": [],
+          "ext": {}
+        },
+        {
+          "name": "funder",
+          "typeId": "String",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": 1
+          },
+          "isKey": false,
+          "isReadOnly": false,
+          "isUnique": false,
+          "isOrdered": false,
+          "constraints": [],
+          "ext": {}
+        },
+        {
+          "name": "language",
+          "typeId": "String",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": 1
+          },
+          "isKey": false,
+          "isReadOnly": false,
+          "isUnique": false,
+          "isOrdered": false,
+          "constraints": [],
+          "ext": {}
+        },
+        {
+          "name": "license",
+          "typeId": "String",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": 1
+          },
+          "isKey": false,
+          "isReadOnly": false,
+          "isUnique": false,
+          "isOrdered": false,
+          "constraints": [],
+          "ext": {}
+        },
+        {
+          "name": "printSourceName",
+          "typeId": "String",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": 1
+          },
+          "isKey": false,
+          "isReadOnly": false,
+          "isUnique": false,
+          "isOrdered": false,
+          "constraints": [],
+          "ext": {}
+        },
+        {
+          "name": "printSourceUrl",
+          "typeId": "String",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": 1
+          },
+          "isKey": false,
+          "isReadOnly": false,
+          "isUnique": false,
+          "isOrdered": false,
+          "constraints": [],
+          "ext": {}
+        },
+        {
+          "name": "shelfmark",
+          "typeId": "String",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": 1
+          },
+          "isKey": false,
+          "isReadOnly": false,
+          "isUnique": false,
+          "isOrdered": false,
+          "constraints": [],
+          "ext": {}
+        },
+        {
+          "name": "textGenre",
+          "typeId": "String",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": 1
+          },
+          "isKey": false,
+          "isReadOnly": false,
+          "isUnique": false,
+          "isOrdered": false,
+          "constraints": [],
+          "ext": {}
+        },
+        {
+          "name": "textType",
+          "typeId": "String",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": 1
+          },
+          "isKey": false,
+          "isReadOnly": false,
+          "isUnique": false,
+          "isOrdered": false,
+          "constraints": [],
+          "ext": {}
+        },
+        {
+          "name": "isReference",
+          "typeId": "Boolean",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": 1
+          },
+          "isKey": false,
+          "isReadOnly": false,
+          "isUnique": false,
+          "isOrdered": false,
+          "constraints": [],
+          "ext": {}
+        }
+      ],
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GNode",
+      "id": "62LNhRGwB5tBvAox",
+      "name": "Abstract",
+      "superTypes": ["lW611f30a2ky4276g3l8N:aP3xK8nV1qR6tY2uZ9wB"],
+      "attributes": [],
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GNode",
+      "id": "4yVbtTuYAmqqrsig",
+      "name": "Document",
+      "superTypes": ["lW611f30a2ky4276g3l8N:aP3xK8nV1qR6tY2uZ9wB"],
+      "attributes": [
+        {
+          "name": "editor",
+          "typeId": "String",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": 1
+          },
+          "isKey": false,
+          "isReadOnly": false,
+          "isUnique": false,
+          "isOrdered": false,
+          "constraints": [],
+          "ext": {}
+        },
+        {
+          "name": "status",
+          "typeId": "String",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": 1
+          },
+          "isKey": false,
+          "isReadOnly": false,
+          "isUnique": false,
+          "isOrdered": false,
+          "constraints": [],
+          "ext": {}
+        },
+        {
+          "name": "xmlDownload",
+          "typeId": "String",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": 1
+          },
+          "isKey": false,
+          "isReadOnly": false,
+          "isUnique": false,
+          "isOrdered": false,
+          "constraints": [],
+          "ext": {}
+        }
+      ],
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GNode",
+      "id": "t5lP6AoLgLua7hhu",
+      "name": "Figure",
+      "superTypes": ["lW611f30a2ky4276g3l8N:aP3xK8nV1qR6tY2uZ9wB"],
+      "attributes": [
+        {
+          "name": "editor",
+          "typeId": "String",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": 1
+          },
+          "isKey": false,
+          "isReadOnly": false,
+          "isUnique": false,
+          "isOrdered": false,
+          "constraints": [],
+          "ext": {}
+        },
+        {
+          "name": "status",
+          "typeId": "String",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": 1
+          },
+          "isKey": false,
+          "isReadOnly": false,
+          "isUnique": false,
+          "isOrdered": false,
+          "constraints": [],
+          "ext": {}
+        },
+        {
+          "name": "xmlDownload",
+          "typeId": "String",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": 1
+          },
+          "isKey": false,
+          "isReadOnly": false,
+          "isUnique": false,
+          "isOrdered": false,
+          "constraints": [],
+          "ext": {}
+        }
+      ],
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GNode",
+      "id": "8jsqrqDPUsInrEbz",
+      "name": "Annotation",
+      "superTypes": ["lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3"],
+      "attributes": [
+        {
+          "name": "startIndex",
+          "typeId": "Integer",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": 1
+          },
+          "isKey": false,
+          "isReadOnly": true,
+          "isUnique": false,
+          "isOrdered": false,
+          "constraints": [],
+          "ext": {}
+        },
+        {
+          "name": "endIndex",
+          "typeId": "Integer",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": 1
+          },
+          "isKey": false,
+          "isReadOnly": true,
+          "isUnique": false,
+          "isOrdered": false,
+          "constraints": [],
+          "ext": {}
+        },
+        {
+          "name": "isZeroPoint",
+          "typeId": "Boolean",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": 1
+          },
+          "isKey": false,
+          "isReadOnly": true,
+          "isUnique": false,
+          "isOrdered": false,
+          "constraints": [],
+          "ext": {}
+        }
+      ],
+      "constraints": [],
+      "ext": {}
+    }
+  ],
+  "relations": [
+    {
+      "kind": "GRelation",
+      "id": "1yq1N7EiFHJvt8zP",
+      "superTypes": ["lW611f30a2ky4276g3l8N:K0mT3aL7vQ9pX4sN1cDz"],
+      "name": "PART_OF",
+      "from": {
+        "nodeId": "Rd9Xrxyi9ToLBzj4",
+        "role": "_content",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "to": {
+        "nodeId": "810GvS72dvKd4689",
+        "role": "_collections",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GRelation",
+      "id": "1Ox2IIXsJiCVaWTM",
+      "superTypes": ["lW611f30a2ky4276g3l8N:K0mT3aL7vQ9pX4sN1cDz"],
+      "name": "PART_OF",
+      "from": {
+        "nodeId": "Rd9Xrxyi9ToLBzj4",
+        "role": "_content",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "to": {
+        "nodeId": "62LNhRGwB5tBvAox",
+        "role": "_collections",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GRelation",
+      "id": "HFvMOZcMSdL0lcEX",
+      "superTypes": ["lW611f30a2ky4276g3l8N:V7pQ2xL9mR0sT6yK1nB3"],
+      "name": "PART_OF",
+      "from": {
+        "nodeId": "810GvS72dvKd4689",
+        "role": "_collections",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "to": {
+        "nodeId": "fbzPvBoVvle1vtPa",
+        "role": "_collectionOf",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GRelation",
+      "id": "QvemUB1uQ8lvRavV",
+      "superTypes": ["lW611f30a2ky4276g3l8N:V7pQ2xL9mR0sT6yK1nB3"],
+      "name": "PART_OF",
+      "from": {
+        "nodeId": "62LNhRGwB5tBvAox",
+        "role": "_collections",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "to": {
+        "nodeId": "fbzPvBoVvle1vtPa",
+        "role": "_collectionOf",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GRelation",
+      "id": "zD8z3jZkziu8s5X5",
+      "superTypes": ["lW611f30a2ky4276g3l8N:V7pQ2xL9mR0sT6yK1nB3"],
+      "name": "PART_OF",
+      "from": {
+        "nodeId": "fbzPvBoVvle1vtPa",
+        "role": "_collections",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "to": {
+        "nodeId": "wyjK9j2FMYfV8NvG",
+        "role": "_collectionOf",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GRelation",
+      "id": "FI6cqlG3uJzhDOkV",
+      "superTypes": ["lW611f30a2ky4276g3l8N:V7pQ2xL9mR0sT6yK1nB3"],
+      "name": "PART_OF",
+      "from": {
+        "nodeId": "v3qE1Hes3jvPQhI8",
+        "role": "_collections",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "to": {
+        "nodeId": "fbzPvBoVvle1vtPa",
+        "role": "_collectionOf",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GRelation",
+      "id": "HmZFG29WslOO4dvW",
+      "superTypes": ["lW611f30a2ky4276g3l8N:V7pQ2xL9mR0sT6yK1nB3"],
+      "name": "PART_OF",
+      "from": {
+        "nodeId": "fbzPvBoVvle1vtPa",
+        "role": "_collections",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "to": {
+        "nodeId": "v3qE1Hes3jvPQhI8",
+        "role": "_collectionOf",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GRelation",
+      "id": "RxgU3ZRAmNzyHlJv",
+      "superTypes": ["lW611f30a2ky4276g3l8N:V7pQ2xL9mR0sT6yK1nB3"],
+      "name": "PART_OF",
+      "from": {
+        "nodeId": "4yVbtTuYAmqqrsig",
+        "role": "_collections",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "to": {
+        "nodeId": "v3qE1Hes3jvPQhI8",
+        "role": "_collectionOf",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GRelation",
+      "id": "KgYry7t56y5xxoDl",
+      "superTypes": ["lW611f30a2ky4276g3l8N:V7pQ2xL9mR0sT6yK1nB3"],
+      "name": "PART_OF",
+      "from": {
+        "nodeId": "t5lP6AoLgLua7hhu",
+        "role": "_collections",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "to": {
+        "nodeId": "v3qE1Hes3jvPQhI8",
+        "role": "_collectionOf",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GRelation",
+      "id": "tKDt7hOx9iskpUyA",
+      "superTypes": ["lW611f30a2ky4276g3l8N:V7pQ2xL9mR0sT6yK1nB3"],
+      "name": "PART_OF",
+      "from": {
+        "nodeId": "810GvS72dvKd4689",
+        "role": "_collections",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "to": {
+        "nodeId": "4yVbtTuYAmqqrsig",
+        "role": "_collectionOf",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GRelation",
+      "id": "Q7li8QP8YOy3bw0X",
+      "superTypes": ["lW611f30a2ky4276g3l8N:V7pQ2xL9mR0sT6yK1nB3"],
+      "name": "PART_OF",
+      "from": {
+        "nodeId": "810GvS72dvKd4689",
+        "role": "_collections",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "to": {
+        "nodeId": "t5lP6AoLgLua7hhu",
+        "role": "_collectionOf",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GRelation",
+      "id": "CApwUtlSEVLW1rA6",
+      "superTypes": ["lW611f30a2ky4276g3l8N:V7pQ2xL9mR0sT6yK1nB3"],
+      "name": "PART_OF",
+      "from": {
+        "nodeId": "wyjK9j2FMYfV8NvG",
+        "role": "_collections",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "to": {
+        "nodeId": "wyjK9j2FMYfV8NvG",
+        "role": "_collectionOf",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GRelation",
+      "id": "l4D9lY4ohghpR4ut",
+      "superTypes": ["lW611f30a2ky4276g3l8N:mR0sT6yK1nB3xV7pQ2xL9"],
+      "name": "REFERS_TO",
+      "from": {
+        "nodeId": "8jsqrqDPUsInrEbz",
+        "role": "_referredToBy",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "to": {
+        "nodeId": "XGSpmeUfuyLIYWdE",
+        "role": "_refersToEntities",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GRelation",
+      "id": "Zqlq0IOJEtmga2Lb",
+      "superTypes": ["lW611f30a2ky4276g3l8N:mR0sT6yK1nB3xV7pQ2xL9"],
+      "name": "REFERS_TO",
+      "from": {
+        "nodeId": "8jsqrqDPUsInrEbz",
+        "role": "_referredToBy",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "to": {
+        "nodeId": "uJN0JGAn0ZK9Enfg",
+        "role": "_refersToEntities",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GRelation",
+      "id": "4g01U5rypm4ofxgK",
+      "superTypes": ["lW611f30a2ky4276g3l8N:mR0sT6yK1nB3xV7pQ2xL9"],
+      "name": "REFERS_TO",
+      "from": {
+        "nodeId": "8jsqrqDPUsInrEbz",
+        "role": "_referredToBy",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "to": {
+        "nodeId": "ypbmZPtK6b7b1AGj",
+        "role": "_refersToEntities",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GRelation",
+      "id": "43r94dznYax5nv39",
+      "superTypes": ["lW611f30a2ky4276g3l8N:mR0sT6yK1nB3xV7pQ2xL9"],
+      "name": "REFERS_TO",
+      "from": {
+        "nodeId": "8jsqrqDPUsInrEbz",
+        "role": "_referredToBy",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "to": {
+        "nodeId": "EIbY6TdESxJG6bfH",
+        "role": "_refersToEntities",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GRelation",
+      "id": "TWrSKznvLWyuqBSo",
+      "superTypes": ["lW611f30a2ky4276g3l8N:vQ9pX4sN1cDzK0mT3aL7"],
+      "name": "REFERS_TO",
+      "from": {
+        "nodeId": "8jsqrqDPUsInrEbz",
+        "role": "_referredToBy",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "to": {
+        "nodeId": "Rd9Xrxyi9ToLBzj4",
+        "role": "_refersToContent",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GRelation",
+      "id": "Kw2Oo25Sa92pETRJ",
+      "superTypes": ["lW611f30a2ky4276g3l8N:Q2yT6vL9mR0sT6yK1nB3"],
+      "name": "HAS_ANNOTATION",
+      "from": {
+        "nodeId": "uJN0JGAn0ZK9Enfg",
+        "role": "_annotatesEntities",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "to": {
+        "nodeId": "8jsqrqDPUsInrEbz",
+        "role": "_annotations",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GRelation",
+      "id": "TpgwLoSwAFpmtDTX",
+      "superTypes": ["lW611f30a2ky4276g3l8N:Q2yT6vL9mR0sT6yK1nB3"],
+      "name": "HAS_ANNOTATION",
+      "from": {
+        "nodeId": "ypbmZPtK6b7b1AGj",
+        "role": "_annotatesEntities",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "to": {
+        "nodeId": "8jsqrqDPUsInrEbz",
+        "role": "_annotations",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GRelation",
+      "id": "aI8kCg73eR2AHRBX",
+      "superTypes": ["lW611f30a2ky4276g3l8N:Q2yT6vL9mR0sT6yK1nB3"],
+      "name": "HAS_ANNOTATION",
+      "from": {
+        "nodeId": "XGSpmeUfuyLIYWdE",
+        "role": "_annotatesEntities",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "to": {
+        "nodeId": "8jsqrqDPUsInrEbz",
+        "role": "_annotations",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GRelation",
+      "id": "gosYKUjSj0KErEQy",
+      "superTypes": ["lW611f30a2ky4276g3l8N:Q2yT6vL9mR0sT6yK1nB3"],
+      "name": "HAS_ANNOTATION",
+      "from": {
+        "nodeId": "EIbY6TdESxJG6bfH",
+        "role": "_annotatesEntities",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "to": {
+        "nodeId": "8jsqrqDPUsInrEbz",
+        "role": "_annotations",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GRelation",
+      "id": "UWrwg5QLnEkqwclT",
+      "superTypes": ["lW611f30a2ky4276g3l8N:sT6yK1nB3xV7pQ2L9mR0"],
+      "name": "HAS_ANNOTATION",
+      "from": {
+        "nodeId": "fbzPvBoVvle1vtPa",
+        "role": "_annotatesCollections",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "to": {
+        "nodeId": "8jsqrqDPUsInrEbz",
+        "role": "_annotations",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GRelation",
+      "id": "xOP77Q5UjrKYSYRQ",
+      "superTypes": ["lW611f30a2ky4276g3l8N:pX4sN1cDzK0mT3aL7vQ9"],
+      "name": "HAS_ANNOTATION",
+      "from": {
+        "nodeId": "Rd9Xrxyi9ToLBzj4",
+        "role": "_annotatesContent",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "to": {
+        "nodeId": "8jsqrqDPUsInrEbz",
+        "role": "_annotations",
+        "bounds": {
+          "lowerBound": 0,
+          "upperBound": -1
+        },
+        "constraints": [],
+        "ext": {}
+      },
+      "constraints": [],
+      "ext": {}
+    }
+  ],
+  "ext": {}
+}

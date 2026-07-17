@@ -1,0 +1,63 @@
+# COMPILED AND GENERATED OUTPUT
+dist
+tmp
+out-tsc
+bazel-out
+out
+**/openapi/openapi*.yaml
+
+# NODE ENGINE AND JAVASCRIPT FILES
+node_modules
+npm-debug.log
+yarn-error.log
+*.js
+!generator.js
+!*.config.js
+!migrations/*.js
+
+# IDEs AND EDITORS
+.angular
+.idea/
+.vscode/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# VISUAL STUDIO CODE
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# MISC FILES AND FOLDERS
+/.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+__screenshots__/
+
+# SYSTEM FILES
+.DS_Store
+Thumbs.db
+
+# ENVIRONMENT AND CONFIG FILES
+.env
+
+config/*
+!config/schemas
+!config/schemas/*.schema.json
+!config/.gitkeep
+
+i18n/*
+!i18n/.gitkeep
+
+build
+.envrc

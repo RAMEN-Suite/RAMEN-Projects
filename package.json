@@ -1,0 +1,12 @@
+{
+  "name": "ora-projects",
+  "productName": "ORA - Graph-based Project Files",
+  "description": "ORA project files including configurations, language files, markdown and more.",
+  "version": "0.0.0",
+  "private": true,
+  "format": "prettier --check src",
+  "format:fix": "prettier --write src",
+  "devDependencies": {
+    "prettier": "^3.8.3"
+  }
+}

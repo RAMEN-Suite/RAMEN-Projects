@@ -1,0 +1,130 @@
+name: deploy abbw gcore files
+
+on:
+  push:
+    branches:
+      - main
+      - awen
+      - cami
+    paths:
+      - "projects/abbw/**.gcore.json"
+      - "projects/gcore.json"
+      - ".github/workflows/abbw-gcore-deploy.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions: {}
+
+env:
+  MAIN_ENVIRONMENTS: '["abbw"]'
+
+jobs:
+  setup:
+    name: Determine environments
+    runs-on: ubuntu-latest
+    outputs:
+      environments: ${{ steps.set-matrix.outputs.environments }}
+    env:
+      GITHUB_REF: ${{ github.ref }}
+    steps:
+      - id: set-matrix
+        run: |
+          if [ "$GITHUB_REF" = "refs/heads/main" ]; then
+            printf 'environments=%s\n' "$MAIN_ENVIRONMENTS" >> "$GITHUB_OUTPUT"
+          elif [ "$GITHUB_REF" = "refs/heads/awen" ]; then
+            echo 'environments=["dev-awen"]' >> "$GITHUB_OUTPUT"
+          elif [ "$GITHUB_REF" = "refs/heads/cami" ]; then
+            printf 'environments=["dev-cami"]' >> "$GITHUB_OUTPUT"
+          else
+            echo 'environments=[]' >> "$GITHUB_OUTPUT"
+          fi
+  sync:
+    needs: setup
+    if: needs.setup.outputs.environments != '[]'
+    name: sync with (${{ matrix.environment }})
+    runs-on: ubuntu-latest
+    environment: ${{ matrix.environment }}
+    permissions:
+      contents: read # required for actions/checkout to fetch repo contents if this repo is private
+    strategy:
+      fail-fast: false
+      matrix:
+        environment: ${{ fromJson(needs.setup.outputs.environments) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+      - name: Install SSH Key
+        env:
+          KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+          PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          HOST: ${{ secrets.SSH_HOST }}
+          USER: ${{ secrets.SSH_USER }}
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          printf '%s\n' "$PRIVATE_KEY" > ~/.ssh/staging.key
+          chmod 600 ~/.ssh/staging.key
+          cat >>~/.ssh/config <<END
+          Host staging
+            HostName $HOST
+            User $USER
+            IdentityFile ~/.ssh/staging.key
+          END
+      - name: Copy gcore to remote
+        working-directory: projects
+        env:
+          USER: ${{ secrets.SSH_USER }}
+        run: rsync -z --mkpath gcore.json "$USER"@staging:gcore/
+      - name: Copy project files to remote
+        working-directory: projects/abbw
+        env:
+          USER: ${{ secrets.SSH_USER }}
+        run: rsync -z --mkpath ramen.gcore.json abbw.gcore.json "$USER"@staging:gcore/
+  restart:
+    needs: [setup, sync]
+    if: needs.setup.outputs.environments != '[]'
+    name: Restart (${{ matrix.environment }}) - Server
+    runs-on: ubuntu-latest
+    environment: ${{ matrix.environment }}
+    permissions:
+      contents: read # required for actions/checkout to fetch repo contents if this repo is private
+      packages: read # required to pull images
+    strategy:
+      fail-fast: false
+      matrix:
+        environment: ${{ fromJson(needs.setup.outputs.environments) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+      - name: Install SSH Key
+        env:
+          KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+          PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY_RESTART }}
+          HOST: ${{ secrets.SSH_HOST }}
+          USER: ${{ secrets.SSH_USER }}
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          printf '%s\n' "$PRIVATE_KEY" > ~/.ssh/staging.key
+          chmod 600 ~/.ssh/staging.key
+          cat >>~/.ssh/config <<END
+          Host staging
+            HostName $HOST
+            User $USER
+            IdentityFile ~/.ssh/staging.key
+          END
+      - name: Restart Container
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: printf '%s' "$GH_TOKEN" | ssh staging restart-gcore

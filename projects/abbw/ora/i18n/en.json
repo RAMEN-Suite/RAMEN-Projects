@@ -1,0 +1,220 @@
+{
+  "pages": {
+    "home": {
+      "title": "Antje Brons Correspondence",
+      "subTitle": "The Struggle for Integration and Self-Assertion"
+    },
+    "introduction": "Introduction",
+    "staff": "Project Team",
+    "collaborators": "Cooperation Partners",
+    "guidelines": "Editorial Guidelines",
+    "digital-methods": "Digital Methodology"
+  },
+  "navbar": {
+    "home": "Home",
+    "project": "Project",
+    "collections": "Complete Corpus",
+    "entities": "Indices"
+  },
+  "footer": {
+    "notice": "&copy; {{ currentYear }} Antje Brons Correspondence. Licensed under <b>[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)</b>.",
+    "columns": {
+      "access": "Quick Access",
+      "workplace_em": "Emden Research Unit",
+      "workplace_gi": "Gießen Research Unit",
+      "cooperation": "A joint project of"
+    },
+    "cooperation": {
+      "dfg": "German Research Foundation",
+      "jalb": "Johannes a Lasco Library",
+      "thm": "Technische Hochschule Mittelhessen – University of Applied Sciences"
+    },
+    "links": {
+      "legal-notice": "Legal Notice",
+      "privacy": "Privacy Policy"
+    }
+  },
+  "entities": {
+    "person": {
+      "label": "Persons"
+    },
+    "place": {
+      "label": "Places"
+    },
+    "organisation": {
+      "label": "Organizations"
+    },
+    "bibleVerse": {
+      "label": "Bible Passages"
+    },
+    "term": {
+      "label": "Subject Terms"
+    },
+    "properties": {
+      "mentions": "{{value}} {{#if (eq value 1)}}mention{{else}}mentions{{/if}}",
+      "remarks": "{{value}} {{#if (eq value 1)}}annotation{{else}}annotations{{/if}}"
+    }
+  },
+  "collections": {
+    "letter": {
+      "label": "Complete Corpus",
+      "properties": {
+        "status": {
+          "display": "Current status: {{ value }}",
+          "final": "Fully Annotated",
+          "transcription": "Transcription",
+          "draft": "Metadata"
+        }
+      },
+      "sort": {
+        "status": "Status",
+        "sent": "Date of Dispatch",
+        "sender": "Sender",
+        "recipient": "Recipient"
+      },
+      "filters": {
+        "status": "Status",
+        "sender": "Sender",
+        "recipient": "Recipient",
+        "from": "Place of Dispatch",
+        "languages": {
+          "title": "Languages",
+          "deu": "German",
+          "nld": "Dutch",
+          "nld_deu": "Dutch/German",
+          "deu_fra": "German/French"
+        }
+      }
+    }
+  },
+  "collection": {
+    "letter": {
+      "metadata": {
+        "title": "Metadata",
+        "sentPerson": "Sender",
+        "sentPlace": "Place of Dispatch",
+        "sentDate": "Date of Dispatch",
+        "receivedPerson": "Recipient"
+      },
+      "text": {
+        "abstract": "Summary",
+        "letter": "Textual Witness"
+      },
+      "citation": {
+        "title": "Citation",
+        "template": "{{#if title}}» **{{title}}** «, edited by Isabel Schnieder{{#if author}}, transliterated by {{author}}{{/if}}, in: {{/if}}{{edition}}.",
+        "edition": "The Struggle for Integration and Self-Assertion – The Correspondence of the East Frisian Mennonite Antje Brons, née Cremer ten Doornkaat (1810–1902), edited by Klaas-Dieter Voß and Andreas Kuczera, with DH contributions by Sebastian Enns, Julian Jarosch, and Stefan Armbruster",
+        "license": "The edition and research data are licensed under a <u>[Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/)</u> license. Free use is permitted provided that the citation information and permalink are supplied and any changes are indicated."
+      }
+    }
+  },
+  "entity": {
+    "person": {
+      "metadata": {
+        "title": "Metadata",
+        "forename": "Forename",
+        "surname": "Surname",
+        "birth": "Birth",
+        "death": "Death",
+        "floruitNotAfter": "Floruit before",
+        "floruitNotBefore": "Floruit after"
+      }
+    },
+    "description": "Additional Description"
+  },
+  "annotations": {
+    "add": "Addition",
+    "abbreviation": "Abbreviation",
+    "unclear": "Uncertain Reading",
+    "sic": "Erroneous Source Text",
+    "regularization": "Regularization",
+    "note": "Note",
+    "folio": "Folio",
+    "person": "Person",
+    "place": "Place",
+    "organization": "Organization",
+    "term": "Subject Term",
+    "bibleVerse": "Bible Passage",
+    "comment": "Comment",
+    "externalLink": "External Link"
+  },
+  "bible": {
+    "genesis": "The Book of Genesis",
+    "exodus": "The Book of Exodus",
+    "leviticus": "The Book of Leviticus",
+    "numbers": "The Book of Numbers",
+    "deuteronomy": "The Book of Deuteronomy",
+    "joshua": "The Book of Joshua",
+    "judges": "The Book of Judges",
+    "ruth": "The Book of Ruth",
+    "1samuel": "The First Book of Samuel",
+    "2samuel": "The Second Book of Samuel",
+    "1kings": "The First Book of Kings",
+    "2kings": "The Second Book of Kings",
+    "1chronicles": "The First Book of Chronicles",
+    "2chronicles": "The Second Book of Chronicles",
+    "ezra": "The Book of Ezra",
+    "nehemiah": "The Book of Nehemiah",
+    "esther": "The Book of Esther",
+    "job": "The Book of Job",
+    "psalms": "The Psalms",
+    "proverbs": "The Proverbs of Solomon",
+    "ecclesiastes": "Ecclesiastes",
+    "songofsolomon": "The Song of Solomon",
+    "isaiah": "The Book of Isaiah",
+    "jeremiah": "The Book of Jeremiah",
+    "lamentations": "The Lamentations of Jeremiah",
+    "ezekiel": "The Book of Ezekiel",
+    "daniel": "The Book of Daniel",
+    "hosea": "The Book of Hosea",
+    "joel": "The Book of Joel",
+    "amos": "The Book of Amos",
+    "obadiah": "The Book of Obadiah",
+    "jonah": "The Book of Jonah",
+    "micah": "The Book of Micah",
+    "nahum": "The Book of Nahum",
+    "habakkuk": "The Book of Habakkuk",
+    "zephaniah": "The Book of Zephaniah",
+    "haggai": "The Book of Haggai",
+    "zechariah": "The Book of Zechariah",
+    "malachi": "The Book of Malachi",
+    "judith": "The Book of Judith",
+    "wisdom": "The Book of Wisdom",
+    "tobit": "The Book of Tobit",
+    "sirach": "The Book of Sirach",
+    "baruch": "The Book of Baruch",
+    "letterofjeremiah": "The Letter of Jeremiah",
+    "1maccabees": "The First Book of Maccabees",
+    "2maccabees": "The Second Book of Maccabees",
+    "additionstoesther": "The Additions to the Book of Esther",
+    "additionstodaniel": "The Additions to the Book of Daniel",
+    "prayerofmanasseh": "The Prayer of Manasseh",
+    "matthew": "The Gospel according to Matthew",
+    "mark": "The Gospel according to Mark",
+    "luke": "The Gospel according to Luke",
+    "john": "The Gospel according to John",
+    "acts": "The Acts of the Apostles",
+    "romans": "The Letter of Paul to the Romans",
+    "1corinthians": "The First Letter of Paul to the Corinthians",
+    "2corinthians": "The Second Letter of Paul to the Corinthians",
+    "galatians": "The Letter of Paul to the Galatians",
+    "ephesians": "The Letter of Paul to the Ephesians",
+    "philippians": "The Letter of Paul to the Philippians",
+    "colossians": "The Letter of Paul to the Colossians",
+    "1thessalonians": "The First Letter of Paul to the Thessalonians",
+    "2thessalonians": "The Second Letter of Paul to the Thessalonians",
+    "1timothy": "The First Letter of Paul to Timothy",
+    "2timothy": "The Second Letter of Paul to Timothy",
+    "titus": "The Letter of Paul to Titus",
+    "philemon": "The Letter of Paul to Philemon",
+    "hebrews": "The Letter to the Hebrews",
+    "james": "The Letter of James",
+    "1peter": "The First Letter of Peter",
+    "2peter": "The Second Letter of Peter",
+    "1john": "The First Letter of John",
+    "2john": "The Second Letter of John",
+    "3john": "The Third Letter of John",
+    "jude": "The Letter of Jude",
+    "revelation": "The Revelation of John"
+  }
+}

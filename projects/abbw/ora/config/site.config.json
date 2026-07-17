@@ -1,0 +1,93 @@
+{
+  "language": {
+    "initial": "de",
+    "available": ["de", "en"]
+  },
+  "navbar": {
+    "items": [
+      {
+        "label": "navbar.home",
+        "href": "/",
+        "isExactMatch": true
+      },
+      {
+        "label": "navbar.project",
+        "href": "/project"
+      },
+      {
+        "label": "navbar.collections",
+        "href": "/collections"
+      },
+      {
+        "label": "navbar.entities",
+        "href": "/entities"
+      }
+    ]
+  },
+  "footer": {
+    "notice": "footer.notice",
+    "columns": [
+      {
+        "kind": "links",
+        "caption": "footer.columns.access",
+        "items": [
+          {
+            "label": "navbar.home",
+            "href": "/"
+          },
+          {
+            "label": "navbar.collections",
+            "href": "/collections"
+          },
+          {
+            "label": "navbar.entities",
+            "href": "/entities"
+          }
+        ]
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "markdown",
+        "caption": "footer.columns.workplace_em",
+        "file": "footer/emden.md"
+      },
+      {
+        "kind": "markdown",
+        "caption": "footer.columns.workplace_gi",
+        "file": "footer/giessen.md"
+      }
+    ],
+    "cooperation": {
+      "caption": "footer.columns.cooperation",
+      "items": [
+        {
+          "src": "images/logo_dfg.svg",
+          "href": "https://gepris.dfg.de/gepris/projekt/527629598",
+          "alt": "footer.cooperation.dfg"
+        },
+        {
+          "src": "images/logo_jalb.svg",
+          "href": "https://www.jalb.de/",
+          "alt": "footer.cooperation.jalb"
+        },
+        {
+          "src": "images/logo_thm.svg",
+          "href": "https://www.thm.de",
+          "alt": "footer.cooperation.thm"
+        }
+      ]
+    },
+    "links": [
+      {
+        "label": "footer.links.legal-notice",
+        "href": "/legal-notice"
+      },
+      {
+        "label": "footer.links.privacy",
+        "href": "/privacy"
+      }
+    ]
+  }
+}

@@ -1,0 +1,80 @@
+name: deploy sbwi ora files
+
+on:
+  push:
+    branches:
+      - main
+      - ora
+    paths:
+      - "projects/sbwi/ora/**"
+      - ".github/workflows/sbwi-ora-deploy.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions: {}
+
+env:
+  MAIN_ENVIRONMENTS: '["sbwi"]'
+
+jobs:
+  setup:
+    name: Determine environments
+    runs-on: ubuntu-latest
+    outputs:
+      environments: ${{ steps.set-matrix.outputs.environments }}
+    env:
+      GITHUB_REF: ${{ github.ref }}
+    steps:
+      - id: set-matrix
+        run: |
+          if [ "$GITHUB_REF" = "refs/heads/main" ]; then
+            printf 'environments=%s\n' "$MAIN_ENVIRONMENTS" >> "$GITHUB_OUTPUT"
+          elif [ "$GITHUB_REF" = "refs/heads/ora" ]; then
+            printf 'environments=["dev-ora"]' >> "$GITHUB_OUTPUT"
+          else
+            echo 'environments=[]' >> "$GITHUB_OUTPUT"
+          fi
+  deploy:
+    needs: setup
+    if: needs.setup.outputs.environments != '[]'
+    name: deploy (${{ matrix.environment }})
+    runs-on: ubuntu-latest
+    environment: ${{ matrix.environment }}
+    permissions:
+      contents: read # required for actions/checkout to fetch repo contents if this repo is private
+    strategy:
+      fail-fast: false
+      matrix:
+        environment: ${{ fromJson(needs.setup.outputs.environments) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+      - name: Install SSH Key
+        env:
+          KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+          PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          HOST: ${{ secrets.SSH_HOST }}
+          USER: ${{ secrets.SSH_USER }}
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          printf '%s\n' "$PRIVATE_KEY" > ~/.ssh/staging.key
+          chmod 600 ~/.ssh/staging.key
+          cat >>~/.ssh/config <<END
+          Host staging
+            HostName $HOST
+            User $USER
+            IdentityFile ~/.ssh/staging.key
+          END
+      - name: Copy project files to remote
+        working-directory: projects/sbwi/ora
+        env:
+          USER: ${{ secrets.SSH_USER }}
+        run: rsync -rz --mkpath --delete assets config i18n markdown "$USER"@staging:ora/

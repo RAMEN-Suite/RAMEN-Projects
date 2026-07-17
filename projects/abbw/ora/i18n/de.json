@@ -1,0 +1,220 @@
+{
+  "pages": {
+    "home": {
+      "title": "Antje Brons Briefwechsel",
+      "subTitle": "Das Ringen um Integration und Selbstbehauptung"
+    },
+    "introduction": "Einleitung",
+    "staff": "Mitarbeitende",
+    "collaborators": "Kooperationspartner",
+    "guidelines": "Editionsrichtlinien",
+    "digital-methods": "Digitale Methodik"
+  },
+  "navbar": {
+    "home": "Startseite",
+    "project": "Projekt",
+    "collections": "Gesamtkorpus",
+    "entities": "Register"
+  },
+  "footer": {
+    "notice": "&copy; {{ currentYear }} Antje Brons Briefwechsel. Lizenziert unter <b>[CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/)</b>.",
+    "columns": {
+      "access": "Schnellzugriff",
+      "workplace_em": "Arbeitsstelle Emden",
+      "workplace_gi": "Arbeitsstelle Gießen",
+      "cooperation": "Ein gemeinsames Projekt der"
+    },
+    "cooperation": {
+      "dfg": "Deutsche Forschungsgemeinschaft",
+      "jalb": "Johannes a Lasco Bibliothek",
+      "thm": "Technische Hochschule Mittelhessen"
+    },
+    "links": {
+      "legal-notice": "Impressum",
+      "privacy": "Datenschutz"
+    }
+  },
+  "entities": {
+    "person": {
+      "label": "Personen"
+    },
+    "place": {
+      "label": "Orte"
+    },
+    "organisation": {
+      "label": "Organisationen"
+    },
+    "bibleVerse": {
+      "label": "Bibelstellen"
+    },
+    "term": {
+      "label": "Sachbegriffe"
+    },
+    "properties": {
+      "mentions": "{{value}} {{#if (eq value 1)}}Erwähnung{{else}}Erwähnungen{{/if}}",
+      "remarks": "{{value}} {{#if (eq value 1)}}Anmerkung{{else}}Anmerkungen{{/if}}"
+    }
+  },
+  "collections": {
+    "letter": {
+      "label": "Gesamtkorpus",
+      "properties": {
+        "status": {
+          "display": "Aktueller Status: {{ value }}",
+          "final": "Tiefenerschlossen",
+          "transcription": "Transkription",
+          "draft": "Metadaten"
+        }
+      },
+      "sort": {
+        "status": "Status",
+        "sent": "Versanddatum",
+        "sender": "Absender",
+        "recipient": "Empfänger"
+      },
+      "filters": {
+        "status": "Status",
+        "sender": "Absender",
+        "recipient": "Empfänger",
+        "from": "Absendeort",
+        "languages": {
+          "title": "Sprachen",
+          "deu": "Deutsch",
+          "nld": "Niederländisch",
+          "nld_deu": "Niederländisch/Deutsch",
+          "deu_fra": "Deutsch/Französisch"
+        }
+      }
+    }
+  },
+  "collection": {
+    "letter": {
+      "metadata": {
+        "title": "Metadaten",
+        "sentPerson": "Absender",
+        "sentPlace": "Absendeort",
+        "sentDate": "Versanddatum",
+        "receivedPerson": "Empfänger"
+      },
+      "text": {
+        "abstract": "Kopfregest",
+        "letter": "Textzeuge"
+      },
+      "citation": {
+        "title": "Zitierhinweis",
+        "template": "{{#if title}}» **{{title}}** «, bearbeitet von Isabel Schnieder{{#if author}}, transliteriert von {{author}}{{/if}}, in: {{/if}}{{edition}}.",
+        "edition": "Das Ringen um Integration und Selbstbehauptung – Der Briefwechsel der ostfriesischen Mennonitin Antje Brons, geb. Cremer ten Doornkaat (1810–1902), hg. von Klaas-Dieter Voß und Andreas Kuczera unter DH-Mitarbeit von Sebastian Enns, Julian Jarosch und Stefan Armbruster",
+        "license": "Edition und Forschungsdaten stehen unter einer <u>[Creative Commons Attribution 4.0 International (CC-BY 4.0)](https://creativecommons.org/licenses/by/4.0/)</u> Lizenz. Freie Verwendung unter Angabe von Zitierhinweis, Permalink und Kenntlichmachung von Änderungen."
+      }
+    }
+  },
+  "entity": {
+    "person": {
+      "metadata": {
+        "title": "Metadaten",
+        "forename": "Vorname",
+        "surname": "Nachname",
+        "birth": "Geboren",
+        "death": "Verstorben",
+        "floruitNotAfter": "Blütezeit vor",
+        "floruitNotBefore": "Blütezeit nach"
+      }
+    },
+    "description": "Ergänzende Beschreibung"
+  },
+  "annotations": {
+    "add": "Hinzufügung",
+    "abbreviation": "Abkürzung",
+    "unclear": "Unsichere Lesung",
+    "sic": "Fehlerhafte Vorlage",
+    "regularization": "Regularisierung",
+    "note": "Notiz",
+    "folio": "Folio",
+    "person": "Person",
+    "place": "Ort",
+    "organization": "Organisation",
+    "term": "Begriff",
+    "bibleVerse": "Bibelstelle",
+    "comment": "Kommentar",
+    "externalLink": "Externer Link"
+  },
+  "bible": {
+    "genesis": "Das erste Buch Mose (Genesis)",
+    "exodus": "Das zweite Buch Mose (Exodus)",
+    "leviticus": "Das dritte Buch Mose (Levitikus)",
+    "numbers": "Das vierte Buch Mose (Numeri)",
+    "deuteronomy": "Das fünfte Buch Mose (Deuteronomium)",
+    "joshua": "Das Buch Josua",
+    "judges": "Das Buch der Richter",
+    "ruth": "Das Buch Rut",
+    "1samuel": "Das erste Buch Samuel",
+    "2samuel": "Das zweite Buch Samuel",
+    "1kings": "Das erste Buch der Könige",
+    "2kings": "Das zweite Buch der Könige",
+    "1chronicles": "Das erste Buch der Chronik",
+    "2chronicles": "Das zweite Buch der Chronik",
+    "ezra": "Das Buch Esra",
+    "nehemiah": "Das Buch Nehemia",
+    "esther": "Das Buch Ester",
+    "job": "Das Buch Hiob",
+    "psalms": "Die Psalmen",
+    "proverbs": "Die Sprüche Salomos",
+    "ecclesiastes": "Der Prediger Salomo",
+    "songofsolomon": "Das Hohelied Salomos",
+    "isaiah": "Das Buch Jesaja",
+    "jeremiah": "Das Buch Jeremia",
+    "lamentations": "Die Klagelieder Jeremias",
+    "ezekiel": "Das Buch Hesekiel",
+    "daniel": "Das Buch Daniel",
+    "hosea": "Das Buch Hosea",
+    "joel": "Das Buch Joel",
+    "amos": "Das Buch Amos",
+    "obadiah": "Das Buch Obadja",
+    "jonah": "Das Buch Jona",
+    "micah": "Das Buch Micha",
+    "nahum": "Das Buch Nahum",
+    "habakkuk": "Das Buch Habakuk",
+    "zephaniah": "Das Buch Zefanja",
+    "haggai": "Das Buch Haggai",
+    "zechariah": "Das Buch Sacharja",
+    "malachi": "Das Buch Maleachi",
+    "judith": "Das Buch Judit",
+    "wisdom": "Das Buch der Weisheit",
+    "tobit": "Das Buch Tobit",
+    "sirach": "Das Buch Jesus Sirach",
+    "baruch": "Das Buch Baruch",
+    "letterofjeremiah": "Der Brief des Jeremia",
+    "1maccabees": "Das erste Buch der Makkabäer",
+    "2maccabees": "Das zweite Buch der Makkabäer",
+    "additionstoesther": "Die Zusätze zum Buch Ester",
+    "additionstodaniel": "Die Zusätze zum Buch Daniel",
+    "prayerofmanasseh": "Das Gebet des Manasse",
+    "matthew": "Das Evangelium nach Matthäus",
+    "mark": "Das Evangelium nach Markus",
+    "luke": "Das Evangelium nach Lukas",
+    "john": "Das Evangelium nach Johannes",
+    "acts": "Die Apostelgeschichte",
+    "romans": "Der Brief des Paulus an die Römer",
+    "1corinthians": "Der erste Brief des Paulus an die Korinther",
+    "2corinthians": "Der zweite Brief des Paulus an die Korinther",
+    "galatians": "Der Brief des Paulus an die Galater",
+    "ephesians": "Der Brief des Paulus an die Epheser",
+    "philippians": "Der Brief des Paulus an die Philipper",
+    "colossians": "Der Brief des Paulus an die Kolosser",
+    "1thessalonians": "Der erste Brief des Paulus an die Thessalonicher",
+    "2thessalonians": "Der zweite Brief des Paulus an die Thessalonicher",
+    "1timothy": "Der erste Brief des Paulus an Timotheus",
+    "2timothy": "Der zweite Brief des Paulus an Timotheus",
+    "titus": "Der Brief des Paulus an Titus",
+    "philemon": "Der Brief des Paulus an Philemon",
+    "hebrews": "Der Brief an die Hebräer",
+    "james": "Der Brief des Jakobus",
+    "1peter": "Der erste Brief des Petrus",
+    "2peter": "Der zweite Brief des Petrus",
+    "1john": "Der erste Brief des Johannes",
+    "2john": "Der zweite Brief des Johannes",
+    "3john": "Der dritte Brief des Johannes",
+    "jude": "Der Brief des Judas",
+    "revelation": "Die Offenbarung des Johannes"
+  }
+}
