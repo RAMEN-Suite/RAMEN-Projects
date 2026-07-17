@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - dev
       - ora
     paths:
       - "projects/sbwi/ora/**"
@@ -17,7 +18,7 @@ concurrency:
 permissions: {}
 
 env:
-  MAIN_ENVIRONMENTS: '["sbwi"]'
+  MAIN_ENVIRONMENTS: "[]"
 
 jobs:
   setup:
@@ -32,6 +33,8 @@ jobs:
         run: |
           if [ "$GITHUB_REF" = "refs/heads/main" ]; then
             printf 'environments=%s\n' "$MAIN_ENVIRONMENTS" >> "$GITHUB_OUTPUT"
+          elif [ "$GITHUB_REF" = "refs/heads/dev" ]; then
+            printf 'environments=["sbwi"]' >> "$GITHUB_OUTPUT"
           elif [ "$GITHUB_REF" = "refs/heads/ora" ]; then
             printf 'environments=["dev-ora"]' >> "$GITHUB_OUTPUT"
           else

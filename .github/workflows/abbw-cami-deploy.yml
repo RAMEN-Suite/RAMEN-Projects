@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - dev
       - cami
     paths:
       - "projects/abbw/cami/**"
@@ -32,6 +33,8 @@ jobs:
         run: |
           if [ "$GITHUB_REF" = "refs/heads/main" ]; then
             printf 'environments=%s\n' "$MAIN_ENVIRONMENTS" >> "$GITHUB_OUTPUT"
+          elif [ "$GITHUB_REF" = "refs/heads/dev" ]; then
+            printf 'environments=["sbwi"]' >> "$GITHUB_OUTPUT"
           elif [ "$GITHUB_REF" = "refs/heads/cami" ]; then
             echo 'environments=["dev-cami"]' >> "$GITHUB_OUTPUT"
           else

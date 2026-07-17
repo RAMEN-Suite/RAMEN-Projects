@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - ora
+      - dev
     paths:
       - "projects/abbw/ora/**"
       - ".github/workflows/abbw-ora-deploy.yml"
@@ -32,6 +33,8 @@ jobs:
         run: |
           if [ "$GITHUB_REF" = "refs/heads/main" ]; then
             printf 'environments=%s\n' "$MAIN_ENVIRONMENTS" >> "$GITHUB_OUTPUT"
+          elif [ "$GITHUB_REF" = "refs/heads/dev" ]; then
+            printf 'environments=["sbwi"]' >> "$GITHUB_OUTPUT"
           elif [ "$GITHUB_REF" = "refs/heads/ora" ]; then
             printf 'environments=["dev-ora"]' >> "$GITHUB_OUTPUT"
           else
