@@ -39,11 +39,13 @@ RETURN
 // [STEP C02] Import letters, documents and figures
 :auto
 CALL apoc.load.json(
-  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json'
+  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json',
+  '$.record[*]',
+  {
+    pathOptions: []
+  }
 )
-YIELD value AS json
-
-UNWIND json.record AS record
+YIELD value AS record
 
 WITH record
 WHERE record.metadata.generalMetadataIsPresent = true
@@ -99,61 +101,118 @@ CALL (record) {
   END |
     SET resource:Figure
   )
-} IN TRANSACTIONS OF 500 ROWS
+} IN TRANSACTIONS OF 100 ROWS
 
 RETURN count(*) AS processedResourceRecords;
 
 
-// [STEP C03] Import variants
+// [STEP C03] Create all variants listed by their parent resources
 :auto
 CALL apoc.load.json(
-  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json'
+  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json',
+  '$.record[*]',
+  {
+    pathOptions: []
+  }
 )
-YIELD value AS json
-
-UNWIND json.record AS record
+YIELD value AS record
 
 WITH record
+WHERE record.metadata.generalMetadataIsPresent = true
+  AND trim(
+    coalesce(
+      toString(
+        record.metadata.generalMetadata.attributes.uuid
+      ),
+      ''
+    )
+  ) <> ''
+
+WITH
+  record.metadata.generalMetadata.attributes.uuid AS resourceUuid,
+  coalesce(
+    apoc.convert.toList(
+      record.metadata.generalMetadata.variants
+    ),
+    []
+  ) AS variantUuids
+
+UNWIND variantUuids AS variantUuid
+
+WITH
+  resourceUuid,
+  variantUuid
 WHERE trim(
   coalesce(
-    toString(
-      record.metadata.variantMetadata.attributes.uuid
-    ),
+    toString(variantUuid),
     ''
   )
 ) <> ''
 
-CALL (record) {
+CALL (
+  resourceUuid,
+  variantUuid
+) {
   MATCH (resource:Collection {
-    uuid: record.metadata.generalMetadata.attributes.uuid
+    uuid: resourceUuid
   })
 
   MERGE (variant:Variant:Collection {
-    uuid: record.metadata.variantMetadata.attributes.uuid
+    uuid: variantUuid
+  })
+
+  MERGE (variant)-[:PART_OF]->(resource)
+} IN TRANSACTIONS OF 100 ROWS
+
+RETURN count(*) AS processedVariantRelations;
+
+
+// [STEP C04] Import metadata for every variant record
+:auto
+CALL apoc.load.json(
+  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json',
+  '$.record[*]',
+  {
+    pathOptions: []
+  }
+)
+YIELD value AS record
+
+WITH
+  record.metadata.variantMetadata.attributes AS variantAttributes
+
+WHERE trim(
+  coalesce(
+    toString(variantAttributes.uuid),
+    ''
+  )
+) <> ''
+
+CALL (variantAttributes) {
+  MERGE (variant:Variant:Collection {
+    uuid: variantAttributes.uuid
   })
 
   SET variant += apoc.map.clean(
-    apoc.convert.toMap(
-      record.metadata.variantMetadata.attributes
-    ),
+    apoc.convert.toMap(variantAttributes),
     [],
     ['', null]
   )
-
-  MERGE (variant)-[:PART_OF]->(resource)
-} IN TRANSACTIONS OF 500 ROWS
+} IN TRANSACTIONS OF 100 ROWS
 
 RETURN count(*) AS processedVariantRecords;
 
 
-// [STEP C04] Import abstracts with texts and annotations
+// [STEP C05] Import abstracts with texts and annotations
 :auto
 CALL apoc.load.json(
-  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json'
+  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json',
+  '$.record[*]',
+  {
+    pathOptions: []
+  }
 )
-YIELD value AS json
-
-UNWIND json.record AS record
+YIELD value AS record
 
 WITH record
 WHERE record.metadata.generalMetadataIsPresent = true
@@ -273,73 +332,48 @@ CALL (record) {
   MERGE (textNode)-[:HAS_ANNOTATION]->(
     annotation
   )
-} IN TRANSACTIONS OF 50 ROWS
+} IN TRANSACTIONS OF 5 ROWS
 
 RETURN count(*) AS processedAbstractRecords;
 
 
-// [STEP C05] Import main texts and notes with annotations
+// [STEP C06] Import variant main texts and annotations
 :auto
 CALL apoc.load.json(
-  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json'
+  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json',
+  '$.record[*]',
+  {
+    pathOptions: []
+  }
 )
-YIELD value AS json
-
-UNWIND json.record AS record
+YIELD value AS record
 
 WITH
-  record,
   record.metadata.variantMetadata.attributes.uuid AS variantUuid,
-  record.texts.variant.main_text AS mainText,
-  record.texts.note AS note
+  record.texts.variant.main_text AS mainText
 
-WITH
-  record,
+WHERE trim(
+  coalesce(
+    toString(variantUuid),
+    ''
+  )
+) <> ''
+  AND mainText IS NOT NULL
+  AND mainText.text IS NOT NULL
+
+CALL (
   variantUuid,
-  CASE
-    WHEN variantUuid IS NULL
-      OR mainText IS NULL
-      OR mainText.text IS NULL
-    THEN []
-
-    ELSE [{
-      parentUuid: variantUuid,
-      source: mainText
-    }]
-  END
-  +
-  CASE
-    WHEN variantUuid IS NULL
-      OR trim(
-        coalesce(
-          toString(note.text),
-          ''
-        )
-      ) = ''
-    THEN []
-
-    ELSE [{
-      parentUuid: variantUuid,
-      source: note
-    }]
-  END AS textSources
-
-UNWIND textSources AS textSource
-
-CALL (textSource) {
-  MATCH (parent:Variant:Collection {
-    uuid: textSource.parentUuid
+  mainText
+) {
+  MATCH (variant:Variant:Collection {
+    uuid: variantUuid
   })
-
-  WITH
-    parent,
-    textSource.source AS sourceText
 
   CREATE (textNode:Text:Content {
     uuid: CASE
-      WHEN sourceText.uuid IS NOT NULL
-        AND trim(toString(sourceText.uuid)) <> ''
-      THEN trim(toString(sourceText.uuid))
+      WHEN mainText.uuid IS NOT NULL
+        AND trim(toString(mainText.uuid)) <> ''
+      THEN trim(toString(mainText.uuid))
 
       ELSE randomUUID()
     END
@@ -347,20 +381,20 @@ CALL (textSource) {
 
   SET textNode += apoc.map.clean(
     {
-      text: sourceText.text
+      text: mainText.text
     },
     [],
     ['', null]
   )
 
-  CREATE (textNode)-[:PART_OF]->(parent)
+  CREATE (textNode)-[:PART_OF]->(variant)
 
   WITH
     textNode,
-    sourceText
+    mainText
 
   UNWIND coalesce(
-    apoc.convert.toList(sourceText.properties),
+    apoc.convert.toList(mainText.properties),
     []
   ) AS property
 
@@ -373,7 +407,7 @@ CALL (textSource) {
       {}
     ) AS attributes
 
-  MERGE (annotation:Annotation {
+  CREATE (annotation:Annotation {
     uuid: CASE
       WHEN property.uuid IS NOT NULL
         AND trim(toString(property.uuid)) <> ''
@@ -400,11 +434,13 @@ CALL (textSource) {
     annotation.startIndex = CASE
       WHEN property.startIndex IS NULL
       THEN null
+
       ELSE toInteger(property.startIndex)
     END,
     annotation.endIndex = CASE
       WHEN property.endIndex IS NULL
       THEN null
+
       ELSE toInteger(property.endIndex)
     END
 
@@ -425,22 +461,164 @@ CALL (textSource) {
     ELSE property.teiType + '-' + annotation.type
   END
 
-  MERGE (textNode)-[:HAS_ANNOTATION]->(
+  CREATE (textNode)-[:HAS_ANNOTATION]->(
     annotation
   )
-} IN TRANSACTIONS OF 25 ROWS
+} IN TRANSACTIONS OF 5 ROWS
 
-RETURN count(*) AS processedTextSources;
+RETURN count(*) AS processedMainTexts;
 
 
-// [STEP C06] Import editorial comments and their annotations
+// [STEP C07] Import variant editorial notes as annotations
 :auto
 CALL apoc.load.json(
-  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json'
+  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json',
+  '$.record[*]',
+  {
+    pathOptions: []
+  }
 )
-YIELD value AS json
+YIELD value AS record
 
-UNWIND json.record AS record
+WITH
+  record.metadata.variantMetadata.attributes.uuid AS variantUuid,
+  record.texts.note AS note
+
+WHERE trim(
+  coalesce(
+    toString(variantUuid),
+    ''
+  )
+) <> ''
+  AND trim(
+    coalesce(
+      toString(note.text),
+      ''
+    )
+  ) <> ''
+
+CALL (
+  variantUuid,
+  note
+) {
+  MATCH (variant:Variant:Collection {
+    uuid: variantUuid
+  })
+
+  CREATE (editorialAnnotation:Annotation {
+    uuid: CASE
+      WHEN note.uuid IS NOT NULL
+        AND trim(toString(note.uuid)) <> ''
+      THEN trim(toString(note.uuid))
+
+      ELSE randomUUID()
+    END,
+    type: 'editorial_comment'
+  })
+
+  CREATE (variant)-[:HAS_ANNOTATION]->(
+    editorialAnnotation
+  )
+
+  CREATE (noteText:Text:Content {
+    uuid: randomUUID(),
+    text: note.text
+  })
+
+  CREATE (editorialAnnotation)-[:REFERS_TO]->(
+    noteText
+  )
+
+  WITH
+    noteText,
+    note
+
+  UNWIND coalesce(
+    apoc.convert.toList(note.properties),
+    []
+  ) AS property
+
+  WITH
+    noteText,
+    property,
+    apoc.convert.toMap(property) AS propertyMap,
+    coalesce(
+      apoc.convert.toMap(property.attributes),
+      {}
+    ) AS attributes
+
+  CREATE (annotation:Annotation {
+    uuid: CASE
+      WHEN property.uuid IS NOT NULL
+        AND trim(toString(property.uuid)) <> ''
+      THEN trim(toString(property.uuid))
+
+      ELSE randomUUID()
+    END
+  })
+
+  SET annotation += apoc.map.removeKeys(
+    propertyMap,
+    [
+      'attributes',
+      'uuid',
+      'guid',
+      'startIndex',
+      'endIndex'
+    ]
+  )
+
+  SET annotation += attributes
+
+  SET
+    annotation.startIndex = CASE
+      WHEN property.startIndex IS NULL
+      THEN null
+
+      ELSE toInteger(property.startIndex)
+    END,
+    annotation.endIndex = CASE
+      WHEN property.endIndex IS NULL
+      THEN null
+
+      ELSE toInteger(property.endIndex)
+    END
+
+  SET annotation.type = CASE
+    WHEN property.teiType IS NULL
+    THEN annotation.type
+
+    WHEN annotation.type IS NULL
+      OR trim(toString(annotation.type)) = ''
+    THEN property.teiType
+
+    WHEN annotation.type = property.teiType
+    THEN annotation.type
+
+    WHEN annotation.type STARTS WITH property.teiType + '-'
+    THEN annotation.type
+
+    ELSE property.teiType + '-' + annotation.type
+  END
+
+  CREATE (noteText)-[:HAS_ANNOTATION]->(
+    annotation
+  )
+} IN TRANSACTIONS OF 5 ROWS
+
+RETURN count(*) AS processedEditorialNotes;
+
+
+// [STEP C08] Import editorial comments and their annotations
+:auto
+CALL apoc.load.json(
+  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json',
+  '$.record[*]',
+  {
+    pathOptions: []
+  }
+)
+YIELD value AS record
 
 UNWIND coalesce(
   apoc.convert.toList(
@@ -543,12 +721,12 @@ CALL (comment) {
   MERGE (commentText)-[:HAS_ANNOTATION]->(
     annotation
   )
-} IN TRANSACTIONS OF 50 ROWS
+} IN TRANSACTIONS OF 5 ROWS
 
 RETURN count(*) AS processedEditorialComments;
 
 
-// [STEP C07] Import corpus introductions
+// [STEP C09] Import corpus introductions
 UNWIND [
   {
     corpusUuid: 'ed_f13a5020-2370-4d65-917c-325ca9e77f31',
@@ -726,14 +904,16 @@ RETURN
   count(annotation) AS importedIntroductionAnnotations;
 
 
-// [STEP C08] Import correspondence annotations
+// [STEP C09] Import correspondence annotations
 :auto
 CALL apoc.load.json(
-  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json'
+  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json',
+  '$.record[*]',
+  {
+    pathOptions: []
+  }
 )
-YIELD value AS json
-
-UNWIND json.record AS record
+YIELD value AS record
 
 WITH record
 WHERE record.metadata.generalMetadataIsPresent = true
@@ -808,19 +988,21 @@ CALL (record, action) {
   YIELD rel
 
   RETURN count(rel) AS importedRelations
-} IN TRANSACTIONS OF 100 ROWS
+} IN TRANSACTIONS OF 20 ROWS
 
 RETURN count(*) AS processedCorrespondenceActions;
 
 
-// [STEP C09] Connect letters to corpora
+// [STEP C10] Connect letters only to their particulars
 :auto
 CALL apoc.load.json(
-  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json'
+  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json',
+  '$.record[*]',
+  {
+    pathOptions: []
+  }
 )
-YIELD value AS json
-
-UNWIND json.record AS record
+YIELD value AS record
 
 WITH record
 WHERE record.metadata.generalMetadataIsPresent = true
@@ -839,31 +1021,44 @@ WITH
   relation
 WHERE relation.relationType = 'PART_OF'
   AND relation.targetNodeType = 'Corpus'
-  AND relation.uuid IS NOT NULL
+  AND trim(
+    coalesce(
+      toString(relation.uuid),
+      ''
+    )
+  ) <> ''
 
-CALL (record, relation) {
+MATCH (particular:Corpus:Collection {
+  uuid: relation.uuid
+})
+
+WHERE NOT EXISTS {
+  MATCH (:Corpus:Collection)-[:PART_OF]->(
+    particular
+  )
+}
+
+CALL (record, particular) {
   MATCH (letter:Letter:Collection {
     uuid: record.metadata.generalMetadata.attributes.uuid
   })
 
-  MATCH (corpus:Corpus:Collection {
-    uuid: relation.uuid
-  })
+  MERGE (letter)-[:PART_OF]->(particular)
+} IN TRANSACTIONS OF 250 ROWS
 
-  MERGE (letter)-[:PART_OF]->(corpus)
-} IN TRANSACTIONS OF 1000 ROWS
-
-RETURN count(*) AS processedCorpusRelations;
+RETURN count(*) AS processedParticularRelations;
 
 
-// [STEP C10] Import attachment collections
+// [STEP C11] Import attachment collections
 :auto
 CALL apoc.load.json(
-  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json'
+  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json',
+  '$.record[*]',
+  {
+    pathOptions: []
+  }
 )
-YIELD value AS json
-
-UNWIND json.record AS record
+YIELD value AS record
 
 WITH
   record,
@@ -909,12 +1104,12 @@ CALL (record, attachmentUuids) {
   MERGE (attachment)-[:PART_OF]->(
     attachmentGroup
   )
-} IN TRANSACTIONS OF 100 ROWS
+} IN TRANSACTIONS OF 20 ROWS
 
 RETURN count(*) AS processedAttachmentGroups;
 
 
-// [STEP C11] Resolve annotation references
+// [STEP C12] Resolve annotation references
 :auto
 MATCH (annotation:Annotation)
 WHERE trim(
@@ -1003,18 +1198,18 @@ CALL (
       commentText
     )
   )
-} IN TRANSACTIONS OF 2000 ROWS
+} IN TRANSACTIONS OF 250 ROWS
 
 RETURN count(*) AS processedAnnotationReferences;
 
 
-// [STEP C12] Remove resolved source keys
+// [STEP C13] Remove resolved source keys
 :auto
 MATCH (annotation:Annotation)
 WHERE annotation.key IS NOT NULL
 
 CALL (annotation) {
   REMOVE annotation.key
-} IN TRANSACTIONS OF 5000 ROWS
+} IN TRANSACTIONS OF 1000 ROWS
 
 RETURN count(*) AS cleanedAnnotationKeys;
