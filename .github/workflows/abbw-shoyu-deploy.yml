@@ -1,14 +1,14 @@
-name: deploy sbwi cami files
+name: deploy abbw shoyu files
 
 on:
   push:
     branches:
       - main
+      - shoyu
       - dev
-      - cami
     paths:
-      - "projects/sbwi/cami/**"
-      - ".github/workflows/sbwi-cami-deploy.yml"
+      - "projects/abbw/shoyu/**"
+      - ".github/workflows/abbw-shoyu-deploy.yml"
   workflow_dispatch:
 
 concurrency:
@@ -18,7 +18,7 @@ concurrency:
 permissions: {}
 
 env:
-  MAIN_ENVIRONMENTS: "[]"
+  MAIN_ENVIRONMENTS: '["abbw"]'
 
 jobs:
   setup:
@@ -35,8 +35,8 @@ jobs:
             printf 'environments=%s\n' "$MAIN_ENVIRONMENTS" >> "$GITHUB_OUTPUT"
           elif [ "$GITHUB_REF" = "refs/heads/dev" ]; then
             printf 'environments=["sbwi"]' >> "$GITHUB_OUTPUT"
-          elif [ "$GITHUB_REF" = "refs/heads/cami" ]; then
-            echo 'environments=["dev-cami"]' >> "$GITHUB_OUTPUT"
+          elif [ "$GITHUB_REF" = "refs/heads/shoyu" ]; then
+            printf 'environments=["dev-shoyu"]' >> "$GITHUB_OUTPUT"
           else
             echo 'environments=[]' >> "$GITHUB_OUTPUT"
           fi
@@ -77,7 +77,7 @@ jobs:
             IdentityFile ~/.ssh/staging.key
           END
       - name: Copy project files to remote
-        working-directory: projects/sbwi/cami
+        working-directory: projects/abbw/shoyu
         env:
           USER: ${{ secrets.SSH_USER }}
-        run: rsync -z --mkpath guidelines.json styles.css "$USER"@staging:cami/
+        run: rsync -rz --mkpath --delete assets config i18n markdown "$USER"@staging:shoyu/
