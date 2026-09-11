@@ -84,12 +84,12 @@ jobs:
         working-directory: projects
         env:
           USER: ${{ secrets.SSH_USER }}
-        run: ssh "$USER"@staging "true"
+        run: ssh staging "true"
       - name: Copy project files to remote
         working-directory: projects/sbwi
         env:
           USER: ${{ secrets.SSH_USER }}
-        run: ssh "$USER"@staging "true"
+        run: ssh staging "true"
   restart:
     needs: [setup, sync]
     if: needs.setup.outputs.environments != '[]'
