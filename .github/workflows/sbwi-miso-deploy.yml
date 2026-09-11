@@ -1,14 +1,14 @@
-name: deploy sbwi ora files
+name: deploy sbwi miso files
 
 on:
   push:
     branches:
       - main
       - dev
-      - ora
+      - miso
     paths:
-      - "projects/sbwi/ora/**"
-      - ".github/workflows/sbwi-ora-deploy.yml"
+      - "projects/sbwi/miso/**"
+      - ".github/workflows/sbwi-miso-deploy.yml"
   workflow_dispatch:
 
 concurrency:
@@ -35,8 +35,8 @@ jobs:
             printf 'environments=%s\n' "$MAIN_ENVIRONMENTS" >> "$GITHUB_OUTPUT"
           elif [ "$GITHUB_REF" = "refs/heads/dev" ]; then
             printf 'environments=["sbwi"]' >> "$GITHUB_OUTPUT"
-          elif [ "$GITHUB_REF" = "refs/heads/ora" ]; then
-            printf 'environments=["dev-ora"]' >> "$GITHUB_OUTPUT"
+          elif [ "$GITHUB_REF" = "refs/heads/miso" ]; then
+            echo 'environments=["dev-miso"]' >> "$GITHUB_OUTPUT"
           else
             echo 'environments=[]' >> "$GITHUB_OUTPUT"
           fi
@@ -77,7 +77,7 @@ jobs:
             IdentityFile ~/.ssh/staging.key
           END
       - name: Copy project files to remote
-        working-directory: projects/sbwi/ora
+        working-directory: projects/sbwi/miso
         env:
           USER: ${{ secrets.SSH_USER }}
-        run: rsync -rz --mkpath --delete assets config i18n markdown "$USER"@staging:ora/
+        run: rsync -z --mkpath guidelines.json styles.css "$USER"@staging:miso/

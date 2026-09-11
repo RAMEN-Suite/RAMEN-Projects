@@ -1,7 +1,7 @@
 {
-  "name": "ora-projects",
-  "productName": "ORA - Graph-based Project Files",
-  "description": "ORA project files including configurations, language files, markdown and more.",
+  "name": "ramen-projects",
+  "productName": "RAMEN - Graph-based Project Files",
+  "description": "RAMEN project files including configurations, language files, markdown and more.",
   "version": "0.0.0",
   "private": true,
   "format": "prettier --check src",

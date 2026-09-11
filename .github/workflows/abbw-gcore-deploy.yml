@@ -5,8 +5,8 @@ on:
     branches:
       - main
       - dev
-      - awen
-      - cami
+      - tori
+      - miso
     paths:
       - "projects/abbw/**.gcore.json"
       - "projects/gcore.json"
@@ -37,10 +37,10 @@ jobs:
             printf 'environments=%s\n' "$MAIN_ENVIRONMENTS" >> "$GITHUB_OUTPUT"
           elif [ "$GITHUB_REF" = "refs/heads/dev" ]; then
             printf 'environments=["sbwi"]' >> "$GITHUB_OUTPUT"
-          elif [ "$GITHUB_REF" = "refs/heads/awen" ]; then
-            echo 'environments=["dev-awen"]' >> "$GITHUB_OUTPUT"
-          elif [ "$GITHUB_REF" = "refs/heads/cami" ]; then
-            printf 'environments=["dev-cami"]' >> "$GITHUB_OUTPUT"
+          elif [ "$GITHUB_REF" = "refs/heads/tori" ]; then
+            echo 'environments=["dev-tori"]' >> "$GITHUB_OUTPUT"
+          elif [ "$GITHUB_REF" = "refs/heads/miso" ]; then
+            printf 'environments=["dev-miso"]' >> "$GITHUB_OUTPUT"
           else
             echo 'environments=[]' >> "$GITHUB_OUTPUT"
           fi
@@ -128,6 +128,6 @@ jobs:
             IdentityFile ~/.ssh/staging.key
           END
       - name: Restart Container
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: printf '%s' "$GH_TOKEN" | ssh staging restart-gcore
+        run: |
+          ssh staging "restart ed/tori server"
+          ssh staging "restart ed/miso server"
