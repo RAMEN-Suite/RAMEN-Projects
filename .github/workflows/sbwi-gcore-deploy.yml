@@ -89,7 +89,7 @@ jobs:
         working-directory: projects/sbwi
         env:
           USER: ${{ secrets.SSH_USER }}
-        run: rsync -z --mkpath ramen.gcore.json project.gcore.json "$USER"@staging:gcore/
+        run: ssh "$USER"@staging "true"
   restart:
     needs: [setup, sync]
     if: needs.setup.outputs.environments != '[]'
